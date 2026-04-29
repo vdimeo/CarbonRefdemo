@@ -124,7 +124,7 @@ You are updating an existing markdown product spec.
 ## Context
 
 Original spec:
-{{PASTE ORIGINAL FILE}}
+https://raw.githubusercontent.com/vdimeo/CarbonRefdemo/refs/heads/main/carbonref_spec.md
 
 Requested changes:
 {{PASTE CHANGES OR PATCH}}
@@ -173,7 +173,7 @@ You are applying a unified diff to an existing file.
 ## Context
 
 Original file:
-{{PASTE ORIGINAL FILE}}
+https://raw.githubusercontent.com/vdimeo/CarbonRefdemo/refs/heads/main/carbonref_spec.md
 
 Diff to apply:
 {{PASTE DIFF}}
