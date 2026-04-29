@@ -215,14 +215,7 @@ If:
 
 ## OUTPUT FORMAT
 
-Return ONLY the modified parts using unified diff format:
 
-```diff
---- original
-+++ updated
-@@
-- old line
-+ new line```
 
 # 🔧 7.PROMPT — Generate HTML Patch from Spec (No Rewrite)
 
