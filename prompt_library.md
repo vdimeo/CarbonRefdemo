@@ -119,18 +119,104 @@ Output format:
 
 # 🔀 5. Prompt — Generate clean diff
 
-Context:
-original file and updated file will be provided
+You are updating an existing markdown product spec.
 
-My request:
-Generate a clean diff between the two versions
+## Context
 
-Constraints:
-- Use standard diff format
-- Keep it readable
-- Focus only on meaningful changes (ignore whitespace if possible)
+Original spec:
+{{PASTE ORIGINAL FILE}}
 
-Output format:
+Requested changes:
+{{PASTE CHANGES OR PATCH}}
+
+## Your task
+
+Apply the requested changes **directly into the original spec**.
+
+## CRITICAL RULES
+
+- DO NOT rewrite the document
+- DO NOT change structure, section names, or ordering unless explicitly required
+- DO NOT rename sections (e.g. "Data model" ≠ "Data & Metrics")
+- DO NOT rephrase existing content unnecessarily
+- DO NOT duplicate content
+- ONLY:
+  - insert new sections where relevant
+  - modify existing lines where explicitly required
+
+- If a section already exists:
+  → update it, do not recreate it
+
+- If structure differs from the patch:
+  → ADAPT the patch to the existing structure (do not force it)
+
+## Output requirements
+
+- Return the FULL updated markdown file
+- Keep formatting clean and consistent
+- No explanations
+- No comments
+- No placeholders
+
+## Quality check before output
+
+Ensure:
+- The original structure is preserved
+- No section was accidentally renamed or duplicated
+- All requested changes are applied
+- The document remains coherent
+
+# 🔧 6.PROMPT — Apply Diff (Strict & Safe)
+
+You are applying a unified diff to an existing file.
+
+## Context
+
+Original file:
+{{PASTE ORIGINAL FILE}}
+
+Diff to apply:
+{{PASTE DIFF}}
+
+## Your task
+
+Apply the diff EXACTLY to the original file.
+
+## CRITICAL RULES
+
+- DO NOT rewrite the file
+- DO NOT reformat anything
+- DO NOT change indentation, spacing, or line breaks
+- DO NOT fix or improve the content
+- DO NOT interpret intent
+
+- ONLY:
+  - remove lines marked with `-`
+  - add lines marked with `+`
+  - keep all other lines STRICTLY identical
+
+## MATCHING RULES (VERY IMPORTANT)
+
+- A `-` line MUST match EXACTLY a line in the original file
+- If it does not match exactly:
+  → DO NOT GUESS
+  → DO NOT APPLY that change
+
+- Apply changes ONLY where the match is exact
+- Preserve original ordering and structure
+
+## AMBIGUITY HANDLING
+
+If:
+- multiple possible match locations exist
+- or a line cannot be matched exactly
+
+→ SKIP that specific change (do not hallucinate placement)
+
+## OUTPUT FORMAT
+
+Return ONLY the modified parts using unified diff format:
+
 ```diff
 --- original
 +++ updated
