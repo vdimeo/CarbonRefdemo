@@ -223,3 +223,114 @@ Return ONLY the modified parts using unified diff format:
 @@
 - old line
 + new line
+
+# 🔧 7.PROMPT — Generate HTML Patch from Spec (No Rewrite)
+
+You are modifying an existing HTML prototype.
+
+## Context
+
+Current HTML file:
+{{PASTE CURRENT HTML FILE}}
+
+Updated product spec:
+{{PASTE UPDATED SPEC}}
+
+UX journal, if needed:
+{{PASTE UX JOURNAL OR LINK}}
+
+## Your task
+
+Identify the minimal HTML/CSS/JS changes required to make the current HTML comply with the updated spec.
+
+## CRITICAL RULES
+
+- DO NOT rewrite the full HTML file
+- DO NOT redesign the UI
+- DO NOT rename existing functions, variables, IDs, classes, tabs, or sections unless explicitly required by the spec
+- DO NOT remove existing functionality unless explicitly required
+- Reuse the existing design system, components, chart logic, and data structures as much as possible
+- Add only what is missing
+- Modify only what conflicts with the updated spec
+- Preserve formatting style and coding conventions from the existing file
+
+## PATCH STRATEGY
+
+Before writing code:
+- Compare the updated spec against the current HTML
+- Identify:
+  - new UI elements to add
+  - existing UI elements to modify
+  - data model changes
+  - chart changes
+  - labels/units to update
+  - interaction changes
+- Ignore anything already implemented correctly
+
+## OUTPUT FORMAT
+
+Return ONLY a unified diff patch:
+
+```diff
+--- index.html
++++ index.html
+@@
+- old line
++ new line
+
+
+---
+
+# 🔧 PROMPT — Apply HTML Patch Safely
+
+You are applying a patch to an existing HTML file.
+
+## Context
+
+Original HTML file:
+{{PASTE CURRENT HTML FILE}}
+
+Patch to apply:
+{{PASTE PATCH}}
+
+## Your task
+
+Apply the patch to the original HTML file.
+
+## CRITICAL RULES
+
+- DO NOT rewrite the HTML file from scratch
+- DO NOT reformat unrelated code
+- DO NOT rename variables, functions, classes, IDs, or tabs
+- DO NOT improve or simplify code beyond the patch
+- DO NOT infer missing changes
+- ONLY apply the patch
+
+## MATCHING RULES
+
+- Removed lines marked with `-` must match the original HTML exactly
+- Added lines marked with `+` must be inserted exactly where the patch indicates
+- If a patch block cannot be matched with high confidence:
+  - DO NOT guess
+  - leave that block unapplied
+  - report it under `UNAPPLIED BLOCKS`
+
+## OUTPUT FORMAT
+
+Return the FULL updated HTML file.
+
+## STRICT OUTPUT RULES
+
+- No explanations before or after
+- No markdown wrapper
+- No commentary
+- Preserve the existing file structure
+- Preserve unrelated whitespace and indentation
+
+## FINAL CHECK
+
+Before output, ensure:
+- All safely applicable patch blocks were applied
+- No unrelated code changed
+- The resulting file is valid HTML
+- Existing JS functions remain intact
