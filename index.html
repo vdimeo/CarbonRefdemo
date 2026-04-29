@@ -9,56 +9,714 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F4F2EB;--card:#fff;--soft:#FAF8F2;--ink:#15201D;--muted:#5E6B66;--softink:#97A09B;--border:#E0DDD2;--b2:#ECE9DE;--g900:#0E342E;--g700:#1F5A50;--g500:#2E8073;--g300:#88B5AB;--g100:#D7E6E1;--g50:#EEF4F1;--red:#A8533F;--redsoft:#EBD5CD;--amber:#C49A4A;--ambsoft:#F0E2C5;--slate:#4B5C7A;--slatesoft:#DDE2EC;--shadow:0 4px 18px rgba(15,40,36,.06);--mono:'JetBrains Mono',ui-monospace,monospace}
-*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}button{font-family:inherit}main{max-width:1380px;margin:0 auto;padding:28px}.topbar{height:62px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}.topbar>div{max-width:1380px;margin:0 auto;height:62px;padding:0 28px;display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center}.brand{display:flex;gap:10px;align-items:center;font-weight:800}.mark{width:26px;height:26px;border-radius:7px;background:var(--g700);position:relative}.mark:after{content:'';position:absolute;inset:7px;border:1.7px solid #fff;border-radius:50%;clip-path:polygon(0 0,100% 0,100% 100%)}.brand span{color:var(--g700)}.tabs{justify-self:center;background:var(--soft);border:1px solid var(--b2);border-radius:10px;padding:4px;display:flex;gap:4px}.tabs button{border:0;background:transparent;padding:8px 18px;border-radius:7px;color:var(--muted);font-weight:600;cursor:pointer}.tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05)}.right{display:flex;gap:14px;align-items:center;color:var(--muted);font-size:.82rem}.export{border:0;background:var(--g700);color:white;border-radius:9px;padding:9px 14px;font-weight:700;cursor:pointer}.dot{width:28px;height:28px;border-radius:50%;background:var(--g100);color:var(--g700);display:grid;place-items:center;font-weight:800}.mode{display:none}.mode.on{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:.2;transform:translateY(4px)}to{opacity:1;transform:none}}
-.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}.project{font-size:1.35rem;font-weight:800;margin-right:auto}.chip,.target{background:white;border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 2px rgba(15,40,36,.04);display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:.83rem}.k{color:var(--softink);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.v{font-weight:700}.target{padding:4px 6px 4px 14px}.target button{border:0;background:transparent;padding:7px 12px;border-radius:7px;color:var(--muted);font-weight:700;cursor:pointer}.target button.on{background:var(--g700);color:white}.target .meta{font-family:var(--mono);font-size:.72rem;color:var(--softink);padding-right:4px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}button{font-family:inherit}main{max-width:1380px;margin:0 auto;padding:28px}
+.topbar{height:62px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}.topbar>div{max-width:1380px;margin:0 auto;height:62px;padding:0 28px;display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800}.mark{width:26px;height:26px;border-radius:7px;background:var(--g700);position:relative}.mark:after{content:'';position:absolute;inset:7px;border:1.7px solid #fff;border-radius:50%;clip-path:polygon(0 0,100% 0,100% 100%)}.brand span{color:var(--g700)}
+.tabs{justify-self:center;background:var(--soft);border:1px solid var(--b2);border-radius:10px;padding:4px;display:flex;gap:4px}.tabs button{border:0;background:transparent;padding:8px 16px;border-radius:7px;color:var(--muted);font-weight:600;cursor:pointer;font-size:.88rem}.tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.right{display:flex;gap:14px;align-items:center;color:var(--muted);font-size:.82rem}.export{border:0;background:var(--g700);color:white;border-radius:9px;padding:9px 14px;font-weight:700;cursor:pointer}.dot{width:28px;height:28px;border-radius:50%;background:var(--g100);color:var(--g700);display:grid;place-items:center;font-weight:800}
+.mode{display:none}.mode.on{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:.2;transform:translateY(4px)}to{opacity:1;transform:none}}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}.project{font-size:1.35rem;font-weight:800;margin-right:auto}
+.chip,.target{background:white;border:1px solid var(--border);border-radius:10px;box-shadow:0 1px 2px rgba(15,40,36,.04);display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:.83rem}
+.k{color:var(--softink);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;font-weight:800}.v{font-weight:700}
+.target{padding:4px 6px 4px 14px}.target button{border:0;background:transparent;padding:7px 12px;border-radius:7px;color:var(--muted);font-weight:700;cursor:pointer}.target button.on{background:var(--g700);color:white}.target .meta{font-family:var(--mono);font-size:.72rem;color:var(--softink);padding-right:4px}
 .banner{display:none;background:white;border-bottom:1px solid var(--border);position:sticky;top:62px;z-index:40;box-shadow:0 4px 12px rgba(15,40,36,.04)}.banner.on{display:block}.banner>div{max-width:1380px;margin:0 auto;padding:13px 28px;display:grid;grid-template-columns:auto 1fr auto;gap:25px;align-items:center}.readout{display:flex;gap:16px;align-items:center}.big{font-family:var(--mono);font-weight:800;font-size:1.35rem}.bad{color:var(--red)}.good{color:var(--g700)}.cost{color:var(--amber)}.track{height:6px;background:var(--b2);border-radius:4px;position:relative}.targetline{position:absolute;left:50%;top:-5px;bottom:-5px;width:2px;background:var(--muted)}.targetline:after{content:'objectif';position:absolute;top:14px;left:50%;transform:translateX(-50%);font-size:.64rem;color:var(--muted);font-weight:700}.mkr{position:absolute;top:-5px;width:16px;height:16px;border-radius:50%;border:3px solid #fff;transform:translateX(-50%);box-shadow:0 1px 3px rgba(0,0,0,.12)}.mkr.now{background:var(--red)}.mkr.proj{background:var(--g700)}
-.card{background:white;border:1px solid var(--border);border-radius:15px;box-shadow:0 1px 2px rgba(15,40,36,.04)}.hero{padding:34px 42px}.headline{display:flex;gap:14px;align-items:baseline}.headline .num{font-size:2.15rem;font-weight:900;letter-spacing:-.04em}.headline .txt{font-size:1.38rem;font-weight:750}.sub{color:var(--muted);font-size:.92rem;line-height:1.55;margin-top:10px}.sub b{color:var(--ink)}.gapline{height:78px;margin:30px 0 8px;padding-top:26px}.gapline .track{height:8px}.gapline .targetline:after{content:'OBJECTIF';top:-20px;letter-spacing:.08em}.gapline .mkr{width:23px;height:23px;top:-8px}.mlabel{position:absolute;bottom:-25px;transform:translateX(-50%);font-family:var(--mono);font-weight:800;font-size:.78rem}.scale{position:absolute;bottom:-25px;transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;color:var(--softink)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.actionLarge{padding:22px 24px;background:var(--soft);border-color:var(--b2);cursor:pointer}.actionLarge.applied{background:var(--g50);border-color:var(--g100)}.rankrow{display:flex;gap:8px;align-items:center;margin-bottom:10px}.ranknum{width:25px;height:25px;border-radius:50%;background:var(--g700);color:white;display:grid;place-items:center;font-weight:800}.tag{font-size:.66rem;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.easy{background:var(--g100);color:var(--g900)}.strategic{background:var(--ambsoft);color:#6E5114}.design{background:var(--slatesoft);color:var(--slate)}.technical{background:#DFDFD7;color:var(--muted)}.aname{font-size:1.05rem;font-weight:800}.adesc{font-size:.82rem;color:var(--muted);margin-top:3px}.deltas{display:flex;gap:24px;margin-top:14px;padding-top:13px;border-top:1px solid var(--b2)}.delta .lab{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--softink);font-weight:800}.delta .val{font-family:var(--mono);font-weight:800;margin-top:2px}.cta{display:flex;gap:12px;margin-top:24px}.primary{border:0;background:var(--g700);color:white;border-radius:10px;padding:12px 20px;font-weight:800;cursor:pointer}.ghost{border:1px solid var(--border);background:transparent;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}.trust{display:flex;justify-content:space-between;gap:20px;margin-top:24px;padding-top:20px;border-top:1px solid var(--b2);font-size:.8rem;color:var(--muted)}.trust b{color:var(--ink)}.trust a{color:var(--g700);font-weight:800;text-decoration:none}
-.section{margin-bottom:28px}.shead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}.stitle{font-size:1.08rem;font-weight:850}.stitle span{font-family:var(--mono);color:var(--softink);font-size:.85rem;margin-right:8px}.ssub{font-size:.82rem;color:var(--muted);margin-top:3px;margin-left:32px}.priority{display:grid;gap:10px}.rowcard{display:grid;grid-template-columns:38px 1fr auto auto auto;gap:11px;align-items:center;padding:16px 22px;cursor:pointer}.rowcard:hover{border-color:var(--g300);box-shadow:var(--shadow)}.rowcard.applied{background:var(--g50);border-color:var(--g300)}.rnk{font-family:var(--mono);font-weight:900;color:var(--softink);text-align:center;font-size:1.1rem}.rowcard.applied .rnk{color:var(--g700)}.line1{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.hub{font-size:.66rem;border:1px solid var(--b2);background:var(--soft);color:var(--muted);border-radius:4px;padding:2px 6px}.small{font-size:.78rem;color:var(--muted);margin-top:3px}.inlineDelta{display:flex;gap:11px}.mini .lab{font-size:.64rem;color:var(--softink);text-transform:uppercase;letter-spacing:.06em;font-weight:800}.mini .val{font-family:var(--mono);font-weight:850;font-size:.88rem}.conf{display:flex;gap:3px}.conf i{width:6px;height:6px;border-radius:50%;background:var(--g500)}.conf i.off{background:var(--border)}.apply{border:1.5px solid var(--g700);background:white;color:var(--g700);border-radius:8px;padding:7px 14px;font-weight:800;min-width:92px;cursor:pointer}.applied .apply{background:var(--g700);color:white}.applied .apply:before{content:'✓ '}.reset{font-size:.78rem;color:var(--softink);cursor:pointer;margin-left:8px}.split{display:grid;grid-template-columns:1fr 360px;gap:16px}.chartCard{padding:22px 26px}.chartHead{display:flex;justify-content:space-between;align-items:baseline}.legend{display:flex;gap:11px;flex-wrap:wrap;margin-top:8px;padding-top:12px;border-top:1px solid var(--b2);font-size:.76rem;color:var(--muted)}.legend span:before{content:'';display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}.leasy:before{background:var(--g500)}.lstrat:before{background:var(--amber)}.ldesign:before{background:var(--slate)}.ltech:before{background:var(--softink)}.side{padding:20px;align-self:start;position:sticky;top:130px}.side h3{font-size:1rem;margin-bottom:10px}.check{display:grid;gap:9px}.check .item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--b2);font-size:.85rem}.check .status{font-family:var(--mono);font-weight:800}.ok{color:var(--g700)}.warn{color:var(--amber)}.ko{color:var(--red)}.evidence{background:var(--soft);border:1px dashed var(--border);border-radius:12px;padding:15px 20px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:.84rem}.evidence b{color:var(--ink)}.evidence a{color:var(--g700);font-weight:800;text-decoration:none}.svgtext{font-family:Inter,sans-serif}.axis{font-family:var(--mono);font-size:10px;fill:var(--softink)}.axisTitle{font-family:Inter,sans-serif;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}.quad{font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;fill:var(--softink)}
-.lotsGrid{display:grid;grid-template-columns:1.3fr .9fr;gap:16px}.lotsCard{padding:22px 26px}.stackedWrap{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:11px}.stackBox{background:var(--soft);border:1px solid var(--b2);border-radius:12px;padding:18px}.stackTitle{font-weight:850;margin-bottom:12px}.stack{height:260px;width:86px;border-radius:10px;overflow:hidden;display:flex;flex-direction:column-reverse;margin:auto;border:1px solid var(--border);background:white}.segLot{display:flex;align-items:center;justify-content:center;color:white;font-size:.75rem;font-family:var(--mono);font-weight:800}.segGO{background:#536B91}.segSO{background:#C95B4A}.segTECH{background:#2F5A50}.segVRD{background:#8C8C8C}.lotLegend{display:grid;gap:8px;margin-top:14px;font-size:.8rem;color:var(--muted)}.lotLegend span:before{content:'';display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px}.lGO:before{background:#536B91}.lSO:before{background:#C95B4A}.lTECH:before{background:#2F5A50}.lVRD:before{background:#8C8C8C}.lotInsight{padding:16px 18px;border-radius:12px;background:var(--g50);border:1px solid var(--g100);margin-top:14px;font-size:.86rem;line-height:1.5}.lotTable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.84rem}.lotTable th{text-align:left;color:var(--softink);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);padding:9px}.lotTable td{border-bottom:1px solid var(--b2);padding:10px 9px}.lotTable td.num{font-family:var(--mono);font-weight:800}.toggleSmall{display:inline-flex;background:var(--soft);border:1px solid var(--b2);border-radius:9px;padding:3px;gap:2px}.toggleSmall button{border:0;background:transparent;border-radius:7px;padding:6px 10px;color:var(--muted);font-weight:700;cursor:pointer}.toggleSmall button.on{background:white;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05)}@media(max-width:1050px){.grid2,.split{grid-template-columns:1fr}.rowcard{grid-template-columns:1fr}.banner>div{grid-template-columns:1fr}.side{position:static}.right span{display:none}}
+.card{background:white;border:1px solid var(--border);border-radius:15px;box-shadow:0 1px 2px rgba(15,40,36,.04)}
+/* === Positionnement === */
+.posGrid{display:grid;grid-template-columns:380px 1fr;gap:16px}
+.formCard{padding:22px 24px}
+.formCard h3{font-size:1.05rem;font-weight:850;margin-bottom:4px}
+.formCard .ssub{font-size:.8rem;color:var(--muted);margin-bottom:16px}
+.formGroup{margin-bottom:18px}
+.formRow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.formRow.single{grid-template-columns:1fr}
+.field label{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--softink);font-weight:800;margin-bottom:5px}
+.field input,.field select{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--soft);font-family:inherit;font-size:.85rem;font-weight:600;color:var(--ink);outline:none}
+.field input:focus,.field select:focus{border-color:var(--g500);background:white}
+.field .hint{font-family:var(--mono);font-size:.66rem;color:var(--softink);margin-top:3px}
+.baselineCard{background:var(--g50);border-color:var(--g100)}
+.baselineCard h3{color:var(--g900)}
+.baselineCard .badge{display:inline-block;background:var(--g700);color:white;font-size:.62rem;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;margin-left:8px;vertical-align:middle}
+.qualToggle{display:flex;gap:4px;background:white;border:1px solid var(--g100);border-radius:8px;padding:3px;margin-top:6px}
+.qualToggle button{flex:1;border:0;background:transparent;padding:7px;border-radius:6px;color:var(--muted);font-weight:700;font-size:.78rem;cursor:pointer}
+.qualToggle button.on{background:var(--g700);color:white}
+.chartCard{padding:22px 26px}
+.chartHead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.stitle{font-size:1.08rem;font-weight:850}.stitle span{font-family:var(--mono);color:var(--softink);font-size:.85rem;margin-right:8px}
+.ssub{font-size:.82rem;color:var(--muted);margin-top:3px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:12px;border-top:1px solid var(--b2);font-size:.76rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.lgProj:before,.lgRef:before,.lgMkt:before,.lgTgt:before,.lgSia:before{content:'';display:inline-block;width:12px;height:12px;border-radius:50%}
+.lgProj:before{background:var(--red);border:2px solid white;box-shadow:0 0 0 1px var(--red)}
+.lgRef:before{background:var(--g700);border:2px solid white;box-shadow:0 0 0 1px var(--g700)}
+.lgMkt:before{background:var(--slatesoft);border-radius:3px;width:14px;height:10px}
+.lgTgt:before{background:var(--muted);width:18px;height:2px;border-radius:0}
+.lgSia:before{background:var(--amber);width:18px;height:2px;border-radius:0}
+.interpCard{padding:20px 24px;background:var(--soft);border:1px solid var(--b2)}
+.interpMsg{font-size:1.02rem;line-height:1.55;color:var(--ink)}
+.interpMsg b{color:var(--g700)}
+.interpKpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;padding-top:16px;border-top:1px solid var(--b2)}
+.interpKpi .lab{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--softink);font-weight:800}
+.interpKpi .val{font-family:var(--mono);font-weight:800;font-size:1.15rem;margin-top:4px}
+.posCta{display:flex;gap:12px;margin-top:20px}
+.primary{border:0;background:var(--g700);color:white;border-radius:10px;padding:12px 20px;font-weight:800;cursor:pointer}
+.ghost{border:1px solid var(--border);background:transparent;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}
+.posChart svg{width:100%;height:420px}
+.axis{font-family:var(--mono);font-size:10px;fill:var(--softink)}
+.axisTitle{font-family:Inter,sans-serif;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}
+.refLineLabel{font-family:Inter,sans-serif;font-size:10px;font-weight:800;fill:var(--amber)}
+.tgtLineLabel{font-family:Inter,sans-serif;font-size:10px;font-weight:800;fill:var(--muted)}
+.dotLabel{font-family:Inter,sans-serif;font-size:11px;font-weight:700;fill:var(--ink)}
+/* === shared sections (Leviers / Scénarios / Synthèse) === */
+.hero{padding:34px 42px}
+.headline{display:flex;gap:14px;align-items:baseline}.headline .num{font-size:2.15rem;font-weight:900;letter-spacing:-.04em}.headline .txt{font-size:1.38rem;font-weight:750}
+.sub{color:var(--muted);font-size:.92rem;line-height:1.55;margin-top:10px}.sub b{color:var(--ink)}
+.gapline{height:78px;margin:30px 0 8px;padding-top:26px}.gapline .track{height:8px}.gapline .targetline:after{content:'OBJECTIF';top:-20px;letter-spacing:.08em}.gapline .mkr{width:23px;height:23px;top:-8px}.mlabel{position:absolute;bottom:-25px;transform:translateX(-50%);font-family:var(--mono);font-weight:800;font-size:.78rem}.scale{position:absolute;bottom:-25px;transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;color:var(--softink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.actionLarge{padding:22px 24px;background:var(--soft);border-color:var(--b2);cursor:pointer}.actionLarge.applied{background:var(--g50);border-color:var(--g100)}
+.rankrow{display:flex;gap:8px;align-items:center;margin-bottom:10px}.ranknum{width:25px;height:25px;border-radius:50%;background:var(--g700);color:white;display:grid;place-items:center;font-weight:800}.tag{font-size:.66rem;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}.easy{background:var(--g100);color:var(--g900)}.strategic{background:var(--ambsoft);color:#6E5114}.design{background:var(--slatesoft);color:var(--slate)}.technical{background:#DFDFD7;color:var(--muted)}
+.aname{font-size:1.05rem;font-weight:800}.adesc{font-size:.82rem;color:var(--muted);margin-top:3px}
+.deltas{display:flex;gap:24px;margin-top:14px;padding-top:13px;border-top:1px solid var(--b2)}.delta .lab{font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--softink);font-weight:800}.delta .val{font-family:var(--mono);font-weight:800;margin-top:2px}
+.cta{display:flex;gap:12px;margin-top:24px}
+.trust{display:flex;justify-content:space-between;gap:20px;margin-top:24px;padding-top:20px;border-top:1px solid var(--b2);font-size:.8rem;color:var(--muted)}.trust b{color:var(--ink)}.trust a{color:var(--g700);font-weight:800;text-decoration:none}
+.section{margin-bottom:28px}.shead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}.ssub2{font-size:.82rem;color:var(--muted);margin-top:3px;margin-left:32px}
+.priority{display:grid;gap:10px}
+.rowcard{display:grid;grid-template-columns:38px 1fr auto auto auto;gap:11px;align-items:center;padding:16px 22px;cursor:pointer}.rowcard:hover{border-color:var(--g300);box-shadow:var(--shadow)}.rowcard.applied{background:var(--g50);border-color:var(--g300)}
+.rnk{font-family:var(--mono);font-weight:900;color:var(--softink);text-align:center;font-size:1.1rem}.rowcard.applied .rnk{color:var(--g700)}
+.line1{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.hub{font-size:.66rem;border:1px solid var(--b2);background:var(--soft);color:var(--muted);border-radius:4px;padding:2px 6px}.small{font-size:.78rem;color:var(--muted);margin-top:3px}
+.inlineDelta{display:flex;gap:11px}.mini .lab{font-size:.64rem;color:var(--softink);text-transform:uppercase;letter-spacing:.06em;font-weight:800}.mini .val{font-family:var(--mono);font-weight:850;font-size:.88rem}
+.conf{display:flex;gap:3px}.conf i{width:6px;height:6px;border-radius:50%;background:var(--g500)}.conf i.off{background:var(--border)}
+.apply{border:1.5px solid var(--g700);background:white;color:var(--g700);border-radius:8px;padding:7px 14px;font-weight:800;min-width:92px;cursor:pointer}.applied .apply{background:var(--g700);color:white}.applied .apply:before{content:'✓ '}
+.reset{font-size:.78rem;color:var(--softink);cursor:pointer;margin-left:8px}
+.split{display:grid;grid-template-columns:1fr 360px;gap:16px}
+.tradeCard{padding:22px 26px}.tradeCard svg{width:100%;height:380px}
+.side{padding:20px;align-self:start;position:sticky;top:130px}.side h3{font-size:1rem;margin-bottom:10px}
+.check{display:grid;gap:9px}.check .item{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--b2);font-size:.85rem}.check .status{font-family:var(--mono);font-weight:800}.ok{color:var(--g700)}.warn{color:var(--amber)}.ko{color:var(--red)}
+.evidence{background:var(--soft);border:1px dashed var(--border);border-radius:12px;padding:15px 20px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:.84rem}.evidence b{color:var(--ink)}.evidence a{color:var(--g700);font-weight:800;text-decoration:none}
+.quad{font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;fill:var(--softink)}
+/* === Scénarios === */
+.lotsGrid{display:grid;grid-template-columns:1.3fr .9fr;gap:16px}.lotsCard{padding:22px 26px}
+.stackedWrap{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:11px}.stackBox{background:var(--soft);border:1px solid var(--b2);border-radius:12px;padding:18px}.stackTitle{font-weight:850;margin-bottom:12px}
+.stack{height:260px;width:86px;border-radius:10px;overflow:hidden;display:flex;flex-direction:column-reverse;margin:auto;border:1px solid var(--border);background:white}.segLot{display:flex;align-items:center;justify-content:center;color:white;font-size:.75rem;font-family:var(--mono);font-weight:800}.segGO{background:#536B91}.segSO{background:#C95B4A}.segTECH{background:#2F5A50}.segVRD{background:#8C8C8C}
+.lotLegend{display:grid;gap:8px;margin-top:14px;font-size:.8rem;color:var(--muted)}.lotLegend span:before{content:'';display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px}.lGO:before{background:#536B91}.lSO:before{background:#C95B4A}.lTECH:before{background:#2F5A50}.lVRD:before{background:#8C8C8C}
+.lotInsight{padding:16px 18px;border-radius:12px;background:var(--g50);border:1px solid var(--g100);margin-top:14px;font-size:.86rem;line-height:1.5}
+.lotTable{width:100%;border-collapse:collapse;margin-top:14px;font-size:.84rem}.lotTable th{text-align:left;color:var(--softink);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);padding:9px}.lotTable td{border-bottom:1px solid var(--b2);padding:10px 9px}.lotTable td.num{font-family:var(--mono);font-weight:800}
+.toggleSmall{display:inline-flex;background:var(--soft);border:1px solid var(--b2);border-radius:9px;padding:3px;gap:2px}.toggleSmall button{border:0;background:transparent;border-radius:7px;padding:6px 10px;color:var(--muted);font-weight:700;cursor:pointer}.toggleSmall button.on{background:white;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+@media(max-width:1050px){.posGrid,.grid2,.split,.lotsGrid{grid-template-columns:1fr}.rowcard{grid-template-columns:1fr}.banner>div{grid-template-columns:1fr}.side{position:static}.right span{display:none}}
 </style>
 </head>
 <body>
-<header class="topbar"><div><div class="brand"><div class="mark"></div><div>Carbon<span>Ref</span></div></div><nav class="tabs"><button class="on" data-mode="decision">Mode décision</button><button data-mode="pilotage">Mode pilotage</button><button data-mode="lots">Lots & coûts</button></nav><div class="right"><button class="export">↓ Export note 1 page</button><span>Retraites Populaires · Pilote</span><div class="dot">RP</div></div></div></header>
-<div class="banner" id="banner"><div><div class="readout"><div><div class="k">Écart actuel</div><div class="big bad" id="bNow">+18%</div></div><div>→</div><div><div class="k" id="bLabel">Avec 2 actions</div><div class="big good" id="bProj">−12%</div></div></div><div class="track"><div class="targetline"></div><div class="mkr now" id="bmNow"></div><div class="mkr proj" id="bmProj"></div></div><div><div class="k">Impact coût</div><div class="big cost" id="bCost">+1 à +5%</div></div></div></div>
+<header class="topbar"><div>
+  <div class="brand"><div class="mark"></div><div>Carbon<span>Ref</span></div></div>
+  <nav class="tabs">
+    <button class="on" data-mode="positionnement">Positionnement</button>
+    <button data-mode="leviers">Leviers</button>
+    <button data-mode="scenarios">Scénarios</button>
+    <button data-mode="synthese">Synthèse</button>
+  </nav>
+  <div class="right"><button class="export">↓ Export note 1 page</button><span>Retraites Populaires · Pilote</span><div class="dot">RP</div></div>
+</div></header>
+
+<div class="banner" id="banner"><div>
+  <div class="readout">
+    <div><div class="k">Écart actuel</div><div class="big bad" id="bNow">+18%</div></div>
+    <div>→</div>
+    <div><div class="k" id="bLabel">Avec 2 actions</div><div class="big good" id="bProj">−12%</div></div>
+  </div>
+  <div class="track"><div class="targetline"></div><div class="mkr now" id="bmNow"></div><div class="mkr proj" id="bmProj"></div></div>
+  <div><div class="k">Impact coût</div><div class="big cost" id="bCost">+1 à +5%</div></div>
+</div></div>
+
 <main>
-<section class="mode on" id="decision">
-  <div class="controls"><div class="project">EMS Vaud · Phase esquisse</div><div class="target"><span class="k">Objectif</span><button class="on" data-target="sia">SIA 390/1</button><button data-target="minergie">Minergie</button><button data-target="custom">Personnalisé</button><span class="meta" id="metaD">9.0 kg/m²/an</span></div><div class="chip"><span class="k">Type</span><span class="v">EMS</span></div><div class="chip"><span class="k">Canton</span><span class="v">Vaud</span></div><div class="chip"><span class="k">Taille</span><span class="v">8–12k m²</span></div><div class="chip"><span class="k">Structure</span><span class="v">Béton</span></div></div>
-  <div class="card hero"><div class="headline"><span class="num bad" id="dNow">+18%</span><span class="txt">au-dessus de votre objectif.</span></div><div class="sub">Deux décisions permettent de passer à <b id="dProj">12% sous l’objectif</b>, avec un impact coût estimé à <b id="dCost">+1 à +5%</b>. Les comparables restent sous le capot : ce cockpit montre des décisions, pas des cas à interpréter.</div><div class="gapline"><div class="track"><div class="targetline"></div><div class="mkr now" id="dmNow"></div><div class="mkr proj" id="dmProj"></div><div class="mlabel bad" id="dlNow">+18%</div><div class="mlabel good" id="dlProj">−12%</div><span class="scale" style="left:0">−50%</span><span class="scale" style="left:50%">0%</span><span class="scale" style="left:100%">+50%</span></div></div>
-    <div class="grid2" id="topActions"></div>
-    <div class="cta"><button class="primary">↓ Exporter cette recommandation</button><button class="ghost" id="goPilotage">Voir les 9 actions →</button></div>
-    <div class="trust"><span><b>Preuve</b> — basé sur 22 EMS suisses réalisés, données carbone + coût appairées, 2018–2024. Fourchettes agrégées et anonymisées.</span><a href="#">Comment sait-on ?</a></div>
+
+<!-- ============ 2.1 POSITIONNEMENT / PROJECT INTAKE ============ -->
+<section class="mode on" id="positionnement">
+  <div class="controls">
+    <div class="project">Positionnement projet</div>
+    <div class="target">
+      <span class="k">Cible</span>
+      <button class="on" data-target="sia">SIA 390/1</button>
+      <button data-target="minergie">Minergie</button>
+      <button data-target="custom">Personnalisé</button>
+      <span class="meta" id="metaPos">9.0 kgCO₂e/m²/an</span>
+    </div>
+  </div>
+
+  <div class="posGrid">
+
+    <!-- LEFT: forms -->
+    <div>
+      <div class="card formCard" style="margin-bottom:16px">
+        <h3>Définition du projet</h3>
+        <div class="ssub">Renseignez les caractéristiques de base. Les comparables marché restent agrégés.</div>
+
+        <div class="formRow single">
+          <div class="field"><label>Nom du projet</label>
+            <input type="text" id="fName" value="EMS Vaud · esquisse">
+          </div>
+        </div>
+        <div class="formRow">
+          <div class="field"><label>Type</label>
+            <select id="fType">
+              <option value="residential">Résidentiel</option>
+              <option value="office">Bureaux</option>
+              <option value="industrial">Industriel</option>
+              <option value="healthcare" selected>Santé / EMS</option>
+            </select>
+          </div>
+          <div class="field"><label>Canton</label>
+            <select id="fCanton">
+              <option value="VD" selected>Vaud</option>
+              <option value="GE">Genève</option>
+              <option value="ZH">Zurich</option>
+              <option value="BE">Berne</option>
+              <option value="BS">Bâle</option>
+              <option value="TI">Tessin</option>
+            </select>
+          </div>
+        </div>
+        <div class="formRow">
+          <div class="field"><label>Surface (SIA m²)</label>
+            <input type="number" id="fGFA" value="8000" step="100">
+          </div>
+          <div class="field"><label>Volume (SIA m³)</label>
+            <input type="number" id="fVol" value="28000" step="100">
+          </div>
+        </div>
+        <div class="formRow">
+          <div class="field"><label>Coût estimé (CHF/m³)</label>
+            <input type="number" id="fCost" value="1700" step="10">
+            <div class="hint">≈ <span id="fCostM2">5950</span> CHF/m²</div>
+          </div>
+          <div class="field"><label>Carbone estimé (kgCO₂e/m²/an)</label>
+            <input type="number" id="fCO2" value="11.5" step="0.1">
+            <div class="hint">total projet ≈ <span id="fCO2tot">5.5</span> tCO₂e/an</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- USER BASELINE BLOCK (spec §2.1) -->
+      <div class="card formCard baselineCard">
+        <h3>Votre référence habituelle <span class="badge">Référence interne</span></h3>
+        <div class="ssub">Capture votre capacité historique à construire — pour vous positionner d'abord par rapport à vous-même.</div>
+
+        <div class="formRow">
+          <div class="field"><label>Coût habituel (CHF/m³)</label>
+            <input type="number" id="bCostInp" value="900" step="10">
+          </div>
+          <div class="field"><label>Standard atteint</label>
+            <select id="bStd">
+              <option value="legal">Standard légal</option>
+              <option value="minergie" selected>Minergie</option>
+              <option value="minergie-p">Minergie-P</option>
+              <option value="snbs">SNBS</option>
+              <option value="none">Aucun</option>
+            </select>
+          </div>
+        </div>
+        <div class="formRow single">
+          <div class="field"><label>Type de projet comparable (optionnel)</label>
+            <select id="bType">
+              <option value="">— même que projet —</option>
+              <option value="residential">Résidentiel</option>
+              <option value="office">Bureaux</option>
+              <option value="healthcare">Santé / EMS</option>
+            </select>
+          </div>
+        </div>
+        <div class="formRow single">
+          <div class="field"><label>Ou estimation qualitative</label>
+            <div class="qualToggle" id="qualToggle">
+              <button data-q="eco">Économique</button>
+              <button data-q="std" class="on">Standard</button>
+              <button data-q="hi">Élevé</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: chart + interpretation -->
+    <div>
+      <div class="card chartCard" style="margin-bottom:16px">
+        <div class="chartHead">
+          <div>
+            <div class="stitle"><span>01</span>Coût × Carbone</div>
+            <div class="ssub">X — Coût (CHF/m³ SIA) · Y — Carbone gris annualisé (kgCO₂e/m²/an)</div>
+          </div>
+        </div>
+        <div class="posChart"><svg id="posChart" viewBox="0 0 800 420"></svg></div>
+        <div class="legend">
+          <span class="lgProj">Projet</span>
+          <span class="lgRef">Référence utilisateur</span>
+          <span class="lgMkt">Benchmark marché (agrégé)</span>
+          <span class="lgTgt">Cible projet</span>
+          <span class="lgSia">SIA 390/1 ≈ 9 kgCO₂e/m²/an</span>
+        </div>
+      </div>
+
+      <!-- INTERPRETATION LAYER (spec §2.1) -->
+      <div class="card interpCard">
+        <div class="stitle" style="margin-bottom:10px"><span>02</span>Interprétation</div>
+        <div class="interpMsg" id="interpMsg"></div>
+        <div class="interpKpis">
+          <div class="interpKpi"><div class="lab">Écart cible (carbone)</div><div class="val bad" id="kGap">+2.5 kgCO₂e/m²/an</div></div>
+          <div class="interpKpi"><div class="lab">Impact coût estimé</div><div class="val cost" id="kCost">+50 à +120 CHF/m³</div></div>
+          <div class="interpKpi"><div class="lab">Position relative</div><div class="val bad" id="kPos">Au-dessus</div></div>
+        </div>
+        <div class="posCta">
+          <button class="primary" id="goLeviers">Continuer vers Leviers →</button>
+          <button class="ghost">↓ Exporter cette page</button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-<section class="mode" id="pilotage">
-  <div class="controls"><div class="project">EMS Vaud · Phase esquisse</div><div class="target"><span class="k">Objectif</span><button class="on" data-target="sia">SIA 390/1</button><button data-target="minergie">Minergie</button><button data-target="custom">Personnalisé</button><span class="meta" id="metaP">9.0 kg/m²/an</span></div><div class="chip"><span class="k">Type</span><span class="v">EMS</span></div><div class="chip"><span class="k">Canton</span><span class="v">Vaud</span></div><div class="chip"><span class="k">Taille</span><span class="v">8–12k m²</span></div><div class="chip"><span class="k">Énergie</span><span class="v">PAC</span></div></div>
-  <div class="section"><div class="shead"><div><div class="stitle"><span>01</span>Actions prioritaires <span class="reset" id="reset">↻ reset</span></div><div class="ssub">Classées par efficacité carbone/coût × confiance. Chaque ligne est une décision à prendre, pas une variable ACV.</div></div><div class="k"><span id="count">2</span>/9 appliquées</div></div><div class="priority" id="list"></div></div>
-  <div class="section split"><div class="chartCard card"><div class="chartHead"><div><div class="stitle"><span>02</span>Arbitrage coût × carbone</div><div class="ssub">Chaque bulle est une action. Le bon quadrant : beaucoup de carbone évité, peu ou pas de coût.</div></div></div><svg id="trade" viewBox="0 0 800 380" style="width:100%;height:380px"></svg><div class="legend"><span class="leasy">Gain facile</span><span class="lstrat">Décision stratégique</span><span class="ldesign">Conception</span><span class="ltech">Technique</span></div></div><aside class="side card"><h3>Checklist projet</h3><div class="sub" style="margin:0 0 12px">Les éléments classiques à vérifier avant d’entrer dans une ACV détaillée.</div><div class="check" id="check"></div></aside></div>
-  <div class="evidence"><span><b>Fondation CarbonRef</b> — allers-retours entre ordres de grandeur statistiques et projets réalisés. Les exemples précis ne sont visibles qu’en preuve méthodologique, pas comme interface principale.</span><a href="#">Méthodologie & pool →</a></div>
+
+<!-- ============ 2.2 LEVIERS ============ -->
+<section class="mode" id="leviers">
+  <div class="controls">
+    <div class="project" id="prLev">EMS Vaud · esquisse</div>
+    <div class="target">
+      <span class="k">Cible</span>
+      <button class="on" data-target="sia">SIA 390/1</button>
+      <button data-target="minergie">Minergie</button>
+      <button data-target="custom">Personnalisé</button>
+      <span class="meta" id="metaL">9.0 kgCO₂e/m²/an</span>
+    </div>
+    <div class="chip"><span class="k">Type</span><span class="v" id="chType">EMS</span></div>
+    <div class="chip"><span class="k">Canton</span><span class="v" id="chCanton">VD</span></div>
+    <div class="chip"><span class="k">Énergie</span><span class="v">PAC</span></div>
+  </div>
+
+  <div class="section">
+    <div class="shead">
+      <div>
+        <div class="stitle"><span>01</span>Actions prioritaires <span class="reset" id="reset">↻ reset</span></div>
+        <div class="ssub2">Classées par efficacité carbone/coût × confiance. Chaque ligne est une décision à prendre, pas une variable ACV.</div>
+      </div>
+      <div class="k"><span id="count">2</span>/9 appliquées</div>
+    </div>
+    <div class="priority" id="list"></div>
+  </div>
+
+  <div class="section split">
+    <div class="tradeCard card">
+      <div class="chartHead">
+        <div>
+          <div class="stitle"><span>02</span>Arbitrage coût × carbone</div>
+          <div class="ssub">Chaque bulle = une action. Le bon quadrant : beaucoup de carbone évité, peu ou pas de coût.</div>
+        </div>
+      </div>
+      <svg id="trade" viewBox="0 0 800 380"></svg>
+      <div class="legend">
+        <span style="background:var(--g500);width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px"></span>Gain facile
+        <span style="background:var(--amber);width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;margin-left:8px"></span>Stratégique
+        <span style="background:var(--slate);width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;margin-left:8px"></span>Conception
+        <span style="background:var(--softink);width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;margin-left:8px"></span>Technique
+      </div>
+    </div>
+    <aside class="side card">
+      <h3>Checklist projet</h3>
+      <div class="sub" style="margin:0 0 12px">Les éléments classiques à vérifier avant d'entrer dans une ACV détaillée.</div>
+      <div class="check" id="check"></div>
+    </aside>
+  </div>
+
+  <div class="evidence">
+    <span><b>Fondation CarbonRef</b> — allers-retours entre ordres de grandeur statistiques et projets réalisés. Les exemples précis ne sont visibles qu'en preuve méthodologique, pas comme interface principale.</span>
+    <a href="#">Méthodologie & pool →</a>
+  </div>
 </section>
-<section class="mode" id="lots"><div class="controls"><div class="project">EMS Vaud · Vue lots & coûts · SIA 390/1 / 60 ans</div><div class="target"><span class="k">Objectif</span><button class="on" data-target="sia">SIA 390/1</button><button data-target="minergie">Minergie</button><button data-target="custom">Personnalisé</button><span class="meta" id="metaL">9.0 kg/m²/an</span></div><div class="chip"><span class="k">Vue</span><span class="v">Actuel vs bas carbone</span></div><div class="chip"><span class="k">Actions</span><span class="v"><span id="lotCount">2</span> appliquées</span></div></div><div class="section lotsGrid"><div class="card lotsCard"><div class="shead"><div><div class="stitle"><span>03</span>Poids carbone et coût par macro-lot</div><div class="ssub">Traduire les actions en impacts par lot : situation actuelle à 10 kgCO₂e/m²/an, soit env. 600 kgCO₂e/m² sur 60 ans, puis scénario bas carbone selon les décisions appliquées.</div></div><div class="toggleSmall"><button class="on">Carbone</button><button>Coût</button></div></div><div class="stackedWrap"><div class="stackBox"><div class="stackTitle">Situation actuelle</div><div class="stack" id="stackCur"></div><div class="sub" style="text-align:center;margin-top:10px"><b id="curTotal">570</b> kgCO₂e/m² sur 60 ans</div></div><div class="stackBox"><div class="stackTitle">Après actions appliquées</div><div class="stack" id="stackOpt"></div><div class="sub" style="text-align:center;margin-top:10px"><b id="optTotal">410</b> kgCO₂e/m² sur 60 ans</div></div></div><div class="lotLegend"><span class="lGO">Gros œuvre</span><span class="lSO">Second œuvre / façades / finitions</span><span class="lTECH">Lots techniques / CVC / ECS</span><span class="lVRD">VRD / infrastructure / parking</span></div><div class="lotInsight" id="lotInsight">Les actions appliquées déplacent surtout le gros œuvre et le parking.</div></div><aside class="card lotsCard"><div class="stitle">Arbitrage par lot</div><div class="sub">Vision cockpit : pas une ACV complète, mais une lecture rapide des masses et des coûts.</div><table class="lotTable"><thead><tr><th>Lot</th><th>Carbone</th><th>Coût</th></tr></thead><tbody id="lotTableBody"></tbody></table><div class="lotInsight" style="background:var(--soft);border-color:var(--b2)"><b>Pourquoi cet onglet ?</b><br>Il permet de garder la logique “ordres de grandeur” tout en montrant concrètement où se situent les gains : gros œuvre, second œuvre, lots techniques, parking.</div></aside></div><div class="evidence"><span><b>Lecture inspirée HUB</b> — les macro-lots ne remplacent pas l’ACV détaillée. Ils servent à préparer les arbitrages avant de mobiliser les ingénieurs.</span><a href="#">Voir la méthode →</a></div></section></main>
+
+<!-- ============ 2.3 SCÉNARIOS ============ -->
+<section class="mode" id="scenarios">
+  <div class="controls">
+    <div class="project">Scénarios · Actuel vs bas carbone · annualisé sur 60 ans</div>
+    <div class="target">
+      <span class="k">Cible</span>
+      <button class="on" data-target="sia">SIA 390/1</button>
+      <button data-target="minergie">Minergie</button>
+      <button data-target="custom">Personnalisé</button>
+      <span class="meta" id="metaS">9.0 kgCO₂e/m²/an</span>
+    </div>
+    <div class="chip"><span class="k">Vue</span><span class="v">Actuel vs bas carbone</span></div>
+    <div class="chip"><span class="k">Actions</span><span class="v"><span id="lotCount">2</span> appliquées</span></div>
+  </div>
+
+  <div class="section lotsGrid">
+    <div class="card lotsCard">
+      <div class="shead">
+        <div>
+          <div class="stitle"><span>01</span>Poids carbone et coût par macro-lot</div>
+          <div class="ssub2">Comparaison de deux scénarios : situation actuelle vs après actions appliquées. Carbone exprimé en kgCO₂e/m²/an équivalent (60 ans).</div>
+        </div>
+        <div class="toggleSmall"><button class="on">Carbone</button><button>Coût</button></div>
+      </div>
+      <div class="stackedWrap">
+        <div class="stackBox">
+          <div class="stackTitle">Scénario actuel</div>
+          <div class="stack" id="stackCur"></div>
+          <div class="sub" style="text-align:center;margin-top:10px"><b id="curTotal">11.5</b> kgCO₂e/m²/an · <span id="curTotal60">690</span> kg sur 60 ans</div>
+        </div>
+        <div class="stackBox">
+          <div class="stackTitle">Scénario bas carbone</div>
+          <div class="stack" id="stackOpt"></div>
+          <div class="sub" style="text-align:center;margin-top:10px"><b id="optTotal">8.2</b> kgCO₂e/m²/an · <span id="optTotal60">490</span> kg sur 60 ans</div>
+        </div>
+      </div>
+      <div class="lotLegend">
+        <span class="lGO">Gros œuvre</span>
+        <span class="lSO">Second œuvre / façades / finitions</span>
+        <span class="lTECH">Lots techniques / CVC / ECS</span>
+        <span class="lVRD">VRD / infrastructure / parking</span>
+      </div>
+      <div class="lotInsight" id="lotInsight">Les actions appliquées déplacent surtout le gros œuvre et le parking.</div>
+    </div>
+    <aside class="card lotsCard">
+      <div class="stitle">Arbitrage par lot</div>
+      <div class="sub">Lecture rapide des masses et des coûts — pas une ACV complète.</div>
+      <table class="lotTable">
+        <thead><tr><th>Lot</th><th>Carbone</th><th>Coût</th></tr></thead>
+        <tbody id="lotTableBody"></tbody>
+      </table>
+      <div class="lotInsight" style="background:var(--soft);border-color:var(--b2)">
+        <b>Pourquoi cet onglet ?</b><br>Garder la logique "ordres de grandeur" tout en montrant concrètement où se situent les gains : gros œuvre, second œuvre, lots techniques, parking.
+      </div>
+    </aside>
+  </div>
+
+  <div class="evidence">
+    <span><b>Lecture inspirée HUB</b> — les macro-lots ne remplacent pas l'ACV détaillée. Ils servent à préparer les arbitrages avant de mobiliser les ingénieurs.</span>
+    <a href="#">Voir la méthode →</a>
+  </div>
+</section>
+
+<!-- ============ 2.4 SYNTHÈSE ============ -->
+<section class="mode" id="synthese">
+  <div class="controls">
+    <div class="project" id="prSyn">EMS Vaud · esquisse</div>
+    <div class="target">
+      <span class="k">Cible</span>
+      <button class="on" data-target="sia">SIA 390/1</button>
+      <button data-target="minergie">Minergie</button>
+      <button data-target="custom">Personnalisé</button>
+      <span class="meta" id="metaSy">9.0 kgCO₂e/m²/an</span>
+    </div>
+    <div class="chip"><span class="k">Type</span><span class="v" id="chTypeSy">EMS</span></div>
+    <div class="chip"><span class="k">Canton</span><span class="v" id="chCantonSy">VD</span></div>
+  </div>
+  <div class="card hero">
+    <div class="headline">
+      <span class="num bad" id="dNow">+18%</span>
+      <span class="txt">au-dessus de votre cible.</span>
+    </div>
+    <div class="sub">Deux décisions permettent de passer à <b id="dProj">12% sous l'objectif</b>, avec un impact coût estimé à <b id="dCost">+1 à +5%</b>. Les comparables restent sous le capot : ce cockpit montre des décisions, pas des cas à interpréter.</div>
+    <div class="gapline"><div class="track"><div class="targetline"></div><div class="mkr now" id="dmNow"></div><div class="mkr proj" id="dmProj"></div><div class="mlabel bad" id="dlNow">+18%</div><div class="mlabel good" id="dlProj">−12%</div><span class="scale" style="left:0">−50%</span><span class="scale" style="left:50%">0%</span><span class="scale" style="left:100%">+50%</span></div></div>
+    <div class="grid2" id="topActions"></div>
+    <div class="cta">
+      <button class="primary">↓ Exporter la synthèse</button>
+      <button class="ghost" id="goLeviers2">Voir les 9 actions →</button>
+    </div>
+    <div class="trust">
+      <span><b>Preuve</b> — basé sur 22 EMS suisses réalisés, données carbone + coût appairées, 2018–2024. Fourchettes agrégées et anonymisées.</span>
+      <a href="#">Comment sait-on ?</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
 <script>
-const targets={sia:{name:'SIA 390/1',val:9.0,gap:11},minergie:{name:'Minergie-A-ECO',val:7.5,gap:33},custom:{name:'Personnalisé',val:8.0,gap:25}};let target='sia';
+/* ===================== STATE ===================== */
+const targets={sia:{name:'SIA 390/1',val:9.0,gap:11},minergie:{name:'Minergie-A-ECO',val:7.5,gap:33},custom:{name:'Personnalisé',val:8.0,gap:25}};
+let target='sia';
+
+const project={name:'EMS Vaud · esquisse',type:'healthcare',canton:'VD',gfa:8000,vol:28000,cost:875,co2:11.5};
+const baseline={cost:850,std:'minergie',type:'',qual:'std'};
+
 const actions=[
 {id:'parking',rank:1,name:'Réduire le ratio parking',sub:'Passer de 1.0 à 0.5 place / résident',hub:'Consommer moins',carbon:[-10,-5],cost:[-1,0],conf:3,tag:'easy',applied:true,star:true},
 {id:'hybrid',rank:2,name:'Passer en structure hybride',sub:'Dalles bois + noyaux béton',hub:'Consommer mieux',carbon:[-35,-25],cost:[2,5],conf:3,tag:'strategic',applied:true,star:true},
-{id:'compact',rank:3,name:'Améliorer la compacité',sub:'Réduire l’enveloppe par m² utile',hub:'Consommer moins',carbon:[-12,-8],cost:[0,1],conf:3,tag:'design',applied:false,star:true},
+{id:'compact',rank:3,name:'Améliorer la compacité',sub:'Réduire l\u2019enveloppe par m² utile',hub:'Consommer moins',carbon:[-12,-8],cost:[0,1],conf:3,tag:'design',applied:false,star:true},
 {id:'data',rank:4,name:'Réduire les données génériques',sub:'De ~40% à <20% de valeurs par défaut',hub:'Méthode',carbon:[-8,-3],cost:[0,0],conf:3,tag:'easy',applied:false},
 {id:'biofac',rank:5,name:'Façade / isolation biosourcée',sub:'Fibre de bois, bardage léger, matériaux documentés',hub:'Consommer mieux',carbon:[-15,-8],cost:[1,3],conf:2,tag:'strategic',applied:false},
 {id:'cvc',rank:6,name:'Optimiser les lots techniques',sub:'Dimensionnement PAC, ventilation, ECS',hub:'Consommer mieux',carbon:[-12,-6],cost:[0,2],conf:2,tag:'technical',applied:false},
 {id:'prog',rank:7,name:'Resserrer le programme',sub:'m² / résident, surfaces partagées, rendements de plan',hub:'Consommer moins',carbon:[-7,-4],cost:[0,0],conf:2,tag:'design',applied:false},
-{id:'acv',rank:8,name:'Avancer la pré-ACV à l’esquisse',sub:'Faire remonter les arbitrages avant APS/APD',hub:'Méthode',carbon:[-5,-2],cost:[0,1],conf:2,tag:'easy',applied:false},
+{id:'acv',rank:8,name:'Avancer la pré-ACV à l\u2019esquisse',sub:'Faire remonter les arbitrages avant APS/APD',hub:'Méthode',carbon:[-5,-2],cost:[0,1],conf:2,tag:'easy',applied:false},
 {id:'gov',rank:9,name:'Mettre une gouvernance carbone',sub:'MOA, architecte et ingénieurs alignés dès J0',hub:'Méthode',carbon:[-4,-2],cost:[0,0],conf:2,tag:'easy',applied:false}
 ];
 const checklist=[['Compacité du bâtiment','À optimiser','warn'],['Ratio parking','Action prioritaire','ko'],['Taux de vitrage','À vérifier','warn'],['Données carbone génériques','Trop élevé','ko'],['Structure carbone','Décision ouverte','warn'],['CVC / lots techniques','Cohérent','ok']];
-function pos(p,min=-50,max=50){return Math.max(0,Math.min(100,((p-min)/(max-min))*100))}function sgn(p){return (p>0?'+':p<0?'−':'')+Math.abs(Math.round(p))+'%'}function range(a){const f=n=>n>0?'+'+n:n<0?'−'+Math.abs(n):'0';return a[0]===0&&a[1]===0?'~0%':f(a[0])+' à '+f(a[1])+'%'}function cr(a){return '−'+Math.abs(a[0])+' à −'+Math.abs(a[1])+'%'}function project(){let bl=targets[target].gap,cl=0,ch=0,lo=0,hi=0,c=0;actions.filter(a=>a.applied).forEach(a=>{cl+=a.carbon[0];ch+=a.carbon[1];lo+=a.cost[0];hi+=a.cost[1];c++});if(!c)return{low:bl,high:bl,cost:[0,0],count:0,mid:bl};let low=Math.round(((1+bl/100)*(1+cl/100)-1)*100),high=Math.round(((1+bl/100)*(1+ch/100)-1)*100);return{low,high,cost:[lo,hi],count:c,mid:(low+high)/2}}
-function tagLabel(t){return{easy:'Gain facile',strategic:'Stratégique',design:'Conception',technical:'Technique'}[t]}function clsCost(a){return a[1]<=0?'good':a[0]===0&&a[1]===0?'':'cost'}
-function lotAdjusted(){const base=[{id:'go',name:'Gros œuvre',cls:'segGO',carbon:198,cost:320},{id:'so',name:'Second œuvre',cls:'segSO',carbon:204,cost:280},{id:'tech',name:'Lots techniques',cls:'segTECH',carbon:186,cost:260},{id:'vrd',name:'VRD / parking',cls:'segVRD',carbon:12,cost:90}];let opt=base.map(x=>({...x}));const on=id=>actions.find(a=>a.id===id)?.applied;if(on('hybrid')){opt.find(x=>x.id==='go').carbon*=0.70;opt.find(x=>x.id==='go').cost*=1.04;}if(on('parking')){opt.find(x=>x.id==='vrd').carbon*=0.55;opt.find(x=>x.id==='vrd').cost*=0.96;}if(on('compact')){opt.forEach(x=>{x.carbon*=0.92});opt.find(x=>x.id==='go').cost*=0.99;}if(on('biofac')){opt.find(x=>x.id==='so').carbon*=0.90;opt.find(x=>x.id==='so').cost*=1.02;}if(on('cvc')){opt.find(x=>x.id==='tech').carbon*=0.92;opt.find(x=>x.id==='tech').cost*=1.01;}if(on('data')){opt.forEach(x=>{x.carbon*=0.96});}if(on('prog')){opt.forEach(x=>{x.carbon*=0.97});}return{base,opt:opt.map(x=>({...x,carbon:Math.round(x.carbon),cost:Math.round(x.cost)}))}}function renderLots(){if(!document.getElementById('stackCur'))return;const {base,opt}=lotAdjusted();const sum=(arr,k)=>arr.reduce((s,x)=>s+x[k],0);const totalC=sum(base,'carbon'),totalO=sum(opt,'carbon');curTotal.textContent=totalC;optTotal.textContent=totalO;lotCount.textContent=actions.filter(a=>a.applied).length;if(document.getElementById('metaL'))metaL.textContent=targets[target].val.toFixed(1)+' kg/m²/an';function fillStack(el,arr,total){el.innerHTML='';arr.forEach(x=>{let h=Math.max(3,x.carbon/total*100);el.insertAdjacentHTML('beforeend',`<div class="segLot ${x.cls}" style="height:${h}%">${Math.round(x.carbon/total*100)}%</div>`)});}fillStack(stackCur,base,totalC);fillStack(stackOpt,opt,totalO);lotTableBody.innerHTML='';base.forEach((b,i)=>{const o=opt[i];const dc=o.carbon-b.carbon;const co=o.cost-b.cost;const carbonTxt=(dc<0?'−':'')+Math.abs(dc)+' kg';const costTxt=(co>0?'+':co<0?'−':'')+Math.abs(co)+' CHF';lotTableBody.insertAdjacentHTML('beforeend',`<tr><td><b>${b.name}</b></td><td class="num ${dc<0?'good':'warn'}">${carbonTxt}</td><td class="num ${co>0?'cost':co<0?'good':''}">${costTxt}</td></tr>`);});const gain=totalC-totalO;lotInsight.innerHTML=`Les actions appliquées réduisent l’ordre de grandeur carbone de <b>${gain} kgCO₂e/m²</b> sur 60 ans (${Math.round(gain/totalC*100)}%). Le coût bouge surtout là où l’on active des choix constructifs ; les gains “méthode” et “parking” restent les plus efficaces économiquement.`;}function render(){let p=project(),base=targets[target].gap,meta=targets[target].val.toFixed(1)+' kg/m²/an';document.querySelectorAll('.target button').forEach(b=>b.classList.toggle('on',b.dataset.target===target));metaD.textContent=meta;metaP.textContent=meta;if(document.getElementById("metaL"))metaL.textContent=meta;dNow.textContent=sgn(base);dlNow.textContent=sgn(base);dProj.textContent=p.high<0?`${Math.abs(p.high)} à ${Math.abs(p.low)}% sous l’objectif`:p.low>0?`${p.low} à ${p.high}% au-dessus de l’objectif`:`${sgn(p.low)} à ${sgn(p.high)} vs objectif`;dCost.textContent=range(p.cost);dmNow.style.left=dlNow.style.left=pos(base)+'%';dmProj.style.left=dlProj.style.left=pos(p.mid)+'%';dlProj.textContent=sgn(p.mid);bNow.textContent=sgn(base);bProj.textContent=sgn(p.mid);bLabel.textContent='Avec '+p.count+' action'+(p.count>1?'s':'');bCost.textContent=range(p.cost);bmNow.style.left=pos(base,-40,40)+'%';bmProj.style.left=pos(p.mid,-40,40)+'%';count.textContent=p.count;
- topActions.innerHTML='';actions.slice(0,2).forEach((a,i)=>topActions.appendChild(actionLarge(a,i+1)));list.innerHTML='';actions.forEach(a=>list.appendChild(row(a)));check.innerHTML='';checklist.forEach(x=>{check.insertAdjacentHTML('beforeend',`<div class="item"><span>${x[0]}</span><span class="status ${x[2]}">${x[1]}</span></div>`)});drawTrade();renderLots();}
-function actionLarge(a,i){let d=document.createElement('div');d.className='card actionLarge '+(a.applied?'applied':'');d.dataset.id=a.id;d.innerHTML=`<div class="rankrow"><div class="ranknum">${i}</div><span class="tag ${a.tag}">★ ${tagLabel(a.tag)}</span></div><div class="aname">${a.name}</div><div class="adesc">${a.sub}</div><div class="deltas"><div class="delta"><div class="lab">Carbone</div><div class="val good">${cr(a.carbon)}</div></div><div class="delta"><div class="lab">Coût</div><div class="val ${clsCost(a.cost)}">${range(a.cost)}</div></div></div>`;d.onclick=()=>{a.applied=!a.applied;render()};return d}
-function row(a){let d=document.createElement('div');d.className='card rowcard '+(a.applied?'applied':'');d.dataset.id=a.id;d.innerHTML=`<div class="rnk">${a.star?'★':a.rank}</div><div><div class="line1"><span class="aname" style="font-size:.96rem">${a.name}</span><span class="tag ${a.tag}">${tagLabel(a.tag)}</span><span class="hub">${a.hub}</span></div><div class="small">${a.sub}</div></div><div class="inlineDelta"><div class="mini"><div class="lab">Carbone</div><div class="val good">${cr(a.carbon)}</div></div><div class="mini"><div class="lab">Coût</div><div class="val ${clsCost(a.cost)}">${range(a.cost)}</div></div></div><div class="conf">${[1,2,3].map(i=>`<i class="${i<=a.conf?'':'off'}"></i>`).join('')}</div><button class="apply">${a.applied?'Appliqué':'Appliquer'}</button>`;d.onclick=()=>{a.applied=!a.applied;render()};return d}
-function drawTrade(){let svg=document.getElementById("trade");svg.innerHTML=`<text class="quad" x="225" y="30" text-anchor="middle">Gains gratuits</text><text class="quad" x="595" y="30" text-anchor="middle">Gains payants</text><g stroke="#ECE9DE">${[60,115,170,225,280].map(y=>`<line x1="80" y1="${y}" x2="740" y2="${y}"/>`).join('')}</g><line x1="80" y1="40" x2="80" y2="320" stroke="#E0DDD2"/><line x1="80" y1="320" x2="740" y2="320" stroke="#E0DDD2"/><line x1="208" y1="40" x2="208" y2="320" stroke="#5E6B66" stroke-dasharray="4 4"/><g class="axis"><text x="80" y="340" text-anchor="middle">−2%</text><text x="208" y="340" text-anchor="middle">0%</text><text x="336" y="340" text-anchor="middle">+2%</text><text x="464" y="340" text-anchor="middle">+4%</text><text x="592" y="340" text-anchor="middle">+6%</text><text x="720" y="340" text-anchor="middle">+8%</text><text x="72" y="320" text-anchor="end">0%</text><text x="72" y="280" text-anchor="end">−10%</text><text x="72" y="225" text-anchor="end">−20%</text><text x="72" y="170" text-anchor="end">−30%</text><text x="72" y="115" text-anchor="end">−40%</text><text x="72" y="60" text-anchor="end">−50%</text></g><text class="axisTitle" x="410" y="368" text-anchor="middle">Impact coût</text><text class="axisTitle" x="40" y="180" transform="rotate(-90 40 180)" text-anchor="middle">Gain carbone</text>`;const colors={easy:'#2E8073',strategic:'#C49A4A',design:'#4B5C7A',technical:'#5E6B66'};function x(v){return 80+((v+2)/10)*660}function y(v){return 320-((Math.abs(v))/50)*280}actions.forEach(a=>{let cx=x((a.cost[0]+a.cost[1])/2),cy=y((a.carbon[0]+a.carbon[1])/2),r=8+a.conf*2,c=colors[a.tag];svg.insertAdjacentHTML('beforeend',`${a.applied?`<circle cx="${cx}" cy="${cy}" r="${r+5}" fill="none" stroke="#1F5A50" stroke-width="2"/>`:''}<circle data-id="${a.id}" cx="${cx}" cy="${cy}" r="${r}" fill="${c}" fill-opacity=".85" stroke="#fff" stroke-width="1.5" style="cursor:pointer"/><text x="${cx+r+6}" y="${cy+4}" font-family="Inter" font-size="11" font-weight="700" fill="#15201D">${a.name}</text>`)});svg.querySelectorAll('circle[data-id]').forEach(c=>c.onclick=()=>{actions.find(a=>a.id===c.dataset.id).applied=!actions.find(a=>a.id===c.dataset.id).applied;render()})}
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');document.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));document.getElementById(b.dataset.mode).classList.add('on');banner.classList.toggle('on',b.dataset.mode==='pilotage'||b.dataset.mode==='lots');scrollTo({top:0,behavior:'smooth'});render()});goPilotage.onclick=()=>document.querySelector('.tabs button[data-mode="pilotage"]').click();document.querySelectorAll('.target button').forEach(b=>b.onclick=()=>{target=b.dataset.target;render()});reset.onclick=()=>{actions.forEach(a=>a.applied=false);render()};render();
+
+/* ===================== HELPERS ===================== */
+function pos(p,min=-50,max=50){return Math.max(0,Math.min(100,((p-min)/(max-min))*100))}
+function sgn(p){return (p>0?'+':p<0?'−':'')+Math.abs(Math.round(p))+'%'}
+function range(a){const f=n=>n>0?'+'+n:n<0?'−'+Math.abs(n):'0';return a[0]===0&&a[1]===0?'~0%':f(a[0])+' à '+f(a[1])+'%'}
+function cr(a){return '−'+Math.abs(a[0])+' à −'+Math.abs(a[1])+'%'}
+function projectAgg(){let bl=targets[target].gap,cl=0,ch=0,lo=0,hi=0,c=0;actions.filter(a=>a.applied).forEach(a=>{cl+=a.carbon[0];ch+=a.carbon[1];lo+=a.cost[0];hi+=a.cost[1];c++});if(!c)return{low:bl,high:bl,cost:[0,0],count:0,mid:bl};let low=Math.round(((1+bl/100)*(1+cl/100)-1)*100),high=Math.round(((1+bl/100)*(1+ch/100)-1)*100);return{low,high,cost:[lo,hi],count:c,mid:(low+high)/2}}
+function tagLabel(t){return{easy:'Gain facile',strategic:'Stratégique',design:'Conception',technical:'Technique'}[t]}
+function clsCost(a){return a[1]<=0?'good':a[0]===0&&a[1]===0?'':'cost'}
+
+/* ===================== POSITIONNEMENT CHART ===================== */
+function drawPosChart(){
+  const svg=document.getElementById('posChart');
+  if(!svg)return;
+  // axis ranges
+  const xMin=600,xMax=2200,yMin=0,yMax=20;
+  const padL=70,padR=30,padT=30,padB=50;
+  const W=800,H=420;
+  const x=v=>padL+((v-xMin)/(xMax-xMin))*(W-padL-padR);
+  const y=v=>(H-padB)-((v-yMin)/(yMax-yMin))*(H-padT-padB);
+
+  let html='';
+  // grid
+  for(let g=0;g<=20;g+=4){html+=`<line x1="${padL}" y1="${y(g)}" x2="${W-padR}" y2="${y(g)}" stroke="#ECE9DE" stroke-width="1"/>`;}
+  for(let g=xMin;g<=xMax;g+=200){html+=`<line x1="${x(g)}" y1="${padT}" x2="${x(g)}" y2="${H-padB}" stroke="#ECE9DE" stroke-width="1"/>`;}
+  // axes
+  html+=`<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${H-padB}" stroke="#E0DDD2"/>`;
+  html+=`<line x1="${padL}" y1="${H-padB}" x2="${W-padR}" y2="${H-padB}" stroke="#E0DDD2"/>`;
+  // y ticks (carbon)
+  for(let g=0;g<=20;g+=4){html+=`<text class="axis" x="${padL-8}" y="${y(g)+4}" text-anchor="end">${g}</text>`;}
+  // x ticks (cost CHF/m³)
+  for(let g=xMin;g<=xMax;g+=400){html+=`<text class="axis" x="${x(g)}" y="${H-padB+18}" text-anchor="middle">${g}</text>`;}
+  // axis titles
+  html+=`<text class="axisTitle" x="${(W+padL-padR)/2}" y="${H-12}" text-anchor="middle">Coût · CHF/m³ SIA</text>`;
+  html+=`<text class="axisTitle" x="${20}" y="${H/2}" text-anchor="middle" transform="rotate(-90 20 ${H/2})">Carbone · kgCO₂e/m²/an</text>`;
+  // market benchmark cloud (aggregated zone) — soft ellipse for healthcare
+  const mktCx=x(1700),mktCy=y(11),mktRx=(x(2100)-x(1300))/2,mktRy=(y(8)-y(14))/2;
+  html+=`<ellipse cx="${mktCx}" cy="${mktCy}" rx="${mktRx}" ry="${mktRy}" fill="${'rgba(75,92,122,0.10)'}" stroke="#4B5C7A" stroke-width="1" stroke-dasharray="4 4"/>`;
+  html+=`<text class="axis" x="${mktCx}" y="${mktCy-mktRy-8}" text-anchor="middle" fill="#4B5C7A">Benchmark marché — santé/EMS · agrégé</text>`;
+  // SIA 390/1 reference line at y=9 (always visible per spec)
+  const ySia=y(9);
+  html+=`<line x1="${padL}" y1="${ySia}" x2="${W-padR}" y2="${ySia}" stroke="#C49A4A" stroke-width="2" stroke-dasharray="6 3"/>`;
+  html+=`<text class="refLineLabel" x="${W-padR-6}" y="${ySia-6}" text-anchor="end">SIA 390/1 ≈ 9 kgCO₂e/m²/an</text>`;
+  // Target line (only if different from SIA)
+  const tVal=targets[target].val;
+  if(Math.abs(tVal-9)>0.05){
+    const yT=y(tVal);
+    html+=`<line x1="${padL}" y1="${yT}" x2="${W-padR}" y2="${yT}" stroke="#5E6B66" stroke-width="2" stroke-dasharray="3 3"/>`;
+    html+=`<text class="tgtLineLabel" x="${padL+8}" y="${yT-6}" text-anchor="start">Cible projet · ${targets[target].name} (${tVal.toFixed(1)})</text>`;
+  }
+  // User baseline point (référence interne)
+  const bCarb=baselineCarbon();
+  const bx=x(baseline.cost),by=y(bCarb);
+  html+=`<circle cx="${bx}" cy="${by}" r="9" fill="#1F5A50" stroke="white" stroke-width="2.5"/>`;
+  html+=`<text class="dotLabel" x="${bx+14}" y="${by+4}" fill="#1F5A50">Référence utilisateur</text>`;
+  // Project dot (large highlighted)
+  const px=x(project.cost),py=y(project.co2);
+  html+=`<circle cx="${px}" cy="${py}" r="13" fill="#A8533F" stroke="white" stroke-width="3"/>`;
+  html+=`<text class="dotLabel" x="${px+18}" y="${py+4}" fill="#A8533F">Projet</text>`;
+
+  svg.innerHTML=html;
+}
+
+/* Map qualitative baseline + standard to a carbon estimate (kgCO₂e/m²/an) */
+function baselineCarbon(){
+  const stdMap={legal:13,minergie:11,'minergie-p':9,snbs:9,none:14};
+  const qualMap={eco:1.5,std:0,hi:-1.5};
+  let v=stdMap[baseline.std]??11;
+  v+=qualMap[baseline.qual]??0;
+  return Math.max(4,Math.min(18,v));
+}
+
+/* ===================== INTERPRETATION ===================== */
+function renderInterp(){
+  const tVal=targets[target].val;
+  const gap=project.co2-tVal;
+  const bC=baselineCarbon();
+  const positionLabel=gap>0.5?'Au-dessus':gap<-0.5?'Sous la cible':'Dans la zone cible';
+  const posClass=gap>0.5?'bad':gap<-0.5?'good':'cost';
+  document.getElementById('kGap').textContent=(gap>0?'+':gap<0?'−':'')+Math.abs(gap).toFixed(1)+' kgCO₂e/m²/an';
+  document.getElementById('kGap').className='val '+posClass;
+  // cost impact estimate: rough +30 CHF/m³ per kg gained (placeholder until levers wired)
+  const costLow=Math.round(Math.max(0,gap)*25);
+  const costHi=Math.round(Math.max(0,gap)*70);
+  document.getElementById('kCost').textContent=gap>0.5?`+${costLow} à +${costHi} CHF/m³`:'~0 CHF/m³';
+  document.getElementById('kPos').textContent=positionLabel;
+  document.getElementById('kPos').className='val '+posClass;
+
+  const msgEl=document.getElementById('interpMsg');
+  if(gap>0.5){
+    msgEl.innerHTML=`Votre pratique habituelle (<b>${bC.toFixed(1)} kgCO₂e/m²/an</b>) vous positionne ici. Pour atteindre la cible <b>${targets[target].name}</b> (${tVal.toFixed(1)}), un effort de <b>${gap.toFixed(1)} kgCO₂e/m²/an</b> est nécessaire, avec un impact coût estimé de <b>+${costLow} à +${costHi} CHF/m³</b>.`;
+  } else if(gap<-0.5){
+    msgEl.innerHTML=`Votre projet est déjà <b>sous la cible ${targets[target].name}</b> (${tVal.toFixed(1)} kgCO₂e/m²/an). Marge actuelle : ${Math.abs(gap).toFixed(1)} kgCO₂e/m²/an.`;
+  } else {
+    msgEl.innerHTML=`Votre projet est <b>dans la zone cible ${targets[target].name}</b> (${tVal.toFixed(1)} ± 0.5 kgCO₂e/m²/an).`;
+  }
+}
+
+/* ===================== SCÉNARIOS ===================== */
+function lotAdjusted(){
+  const base=[
+    {id:'go',name:'Gros œuvre',cls:'segGO',carbon:198,cost:320},
+    {id:'so',name:'Second œuvre',cls:'segSO',carbon:204,cost:280},
+    {id:'tech',name:'Lots techniques',cls:'segTECH',carbon:186,cost:260},
+    {id:'vrd',name:'VRD / parking',cls:'segVRD',carbon:12,cost:90}
+  ];
+  let opt=base.map(x=>({...x}));
+  const on=id=>actions.find(a=>a.id===id)?.applied;
+  if(on('hybrid')){opt.find(x=>x.id==='go').carbon*=0.70;opt.find(x=>x.id==='go').cost*=1.04}
+  if(on('parking')){opt.find(x=>x.id==='vrd').carbon*=0.55;opt.find(x=>x.id==='vrd').cost*=0.96}
+  if(on('compact')){opt.forEach(x=>{x.carbon*=0.92});opt.find(x=>x.id==='go').cost*=0.99}
+  if(on('biofac')){opt.find(x=>x.id==='so').carbon*=0.90;opt.find(x=>x.id==='so').cost*=1.02}
+  if(on('cvc')){opt.find(x=>x.id==='tech').carbon*=0.92;opt.find(x=>x.id==='tech').cost*=1.01}
+  if(on('data')){opt.forEach(x=>{x.carbon*=0.96})}
+  if(on('prog')){opt.forEach(x=>{x.carbon*=0.97})}
+  return{base,opt:opt.map(x=>({...x,carbon:Math.round(x.carbon),cost:Math.round(x.cost)}))}
+}
+function renderLots(){
+  if(!document.getElementById('stackCur'))return;
+  const{base,opt}=lotAdjusted();
+  const sum=(arr,k)=>arr.reduce((s,x)=>s+x[k],0);
+  const totalC=sum(base,'carbon'),totalO=sum(opt,'carbon');
+  curTotal.textContent=(totalC/60).toFixed(1);
+  optTotal.textContent=(totalO/60).toFixed(1);
+  document.getElementById('curTotal60').textContent=totalC;
+  document.getElementById('optTotal60').textContent=totalO;
+  lotCount.textContent=actions.filter(a=>a.applied).length;
+  if(document.getElementById('metaS'))metaS.textContent=targets[target].val.toFixed(1)+' kgCO₂e/m²/an';
+  function fillStack(el,arr,total){el.innerHTML='';arr.forEach(x=>{let h=Math.max(3,x.carbon/total*100);el.insertAdjacentHTML('beforeend',`<div class="segLot ${x.cls}" style="height:${h}%">${Math.round(x.carbon/total*100)}%</div>`)})}
+  fillStack(stackCur,base,totalC);
+  fillStack(stackOpt,opt,totalO);
+  lotTableBody.innerHTML='';
+  base.forEach((b,i)=>{
+    const o=opt[i];
+    const dc=o.carbon-b.carbon;
+    const co=o.cost-b.cost;
+    const carbonTxt=(dc<0?'−':'')+Math.abs(dc)+' kg';
+    const costTxt=(co>0?'+':co<0?'−':'')+Math.abs(co)+' CHF';
+    lotTableBody.insertAdjacentHTML('beforeend',`<tr><td><b>${b.name}</b></td><td class="num ${dc<0?'good':'warn'}">${carbonTxt}</td><td class="num ${co>0?'cost':co<0?'good':''}">${costTxt}</td></tr>`);
+  });
+  const gain=totalC-totalO;
+  lotInsight.innerHTML=`Les actions appliquées réduisent l'ordre de grandeur carbone de <b>${gain} kgCO₂e/m²</b> sur 60 ans, soit <b>${(gain/60).toFixed(1)} kgCO₂e/m²/an</b> (${Math.round(gain/totalC*100)}%). Le coût bouge surtout là où l'on active des choix constructifs ; les gains "méthode" et "parking" restent les plus efficaces économiquement.`;
+}
+
+/* ===================== TRADE-OFF (LEVIERS) ===================== */
+function drawTrade(){
+  let svg=document.getElementById("trade");
+  if(!svg)return;
+  svg.innerHTML=`<text class="quad" x="225" y="30" text-anchor="middle">Gains gratuits</text><text class="quad" x="595" y="30" text-anchor="middle">Gains payants</text><g stroke="#ECE9DE">${[60,115,170,225,280].map(y=>`<line x1="80" y1="${y}" x2="740" y2="${y}"/>`).join('')}</g><line x1="80" y1="40" x2="80" y2="320" stroke="#E0DDD2"/><line x1="80" y1="320" x2="740" y2="320" stroke="#E0DDD2"/><line x1="208" y1="40" x2="208" y2="320" stroke="#5E6B66" stroke-dasharray="4 4"/><g class="axis"><text x="80" y="340" text-anchor="middle">−2%</text><text x="208" y="340" text-anchor="middle">0%</text><text x="336" y="340" text-anchor="middle">+2%</text><text x="464" y="340" text-anchor="middle">+4%</text><text x="592" y="340" text-anchor="middle">+6%</text><text x="720" y="340" text-anchor="middle">+8%</text><text x="72" y="320" text-anchor="end">0%</text><text x="72" y="280" text-anchor="end">−10%</text><text x="72" y="225" text-anchor="end">−20%</text><text x="72" y="170" text-anchor="end">−30%</text><text x="72" y="115" text-anchor="end">−40%</text><text x="72" y="60" text-anchor="end">−50%</text></g><text class="axisTitle" x="410" y="368" text-anchor="middle">Impact coût (%)</text><text class="axisTitle" x="40" y="180" transform="rotate(-90 40 180)" text-anchor="middle">Gain carbone (%)</text>`;
+  const colors={easy:'#2E8073',strategic:'#C49A4A',design:'#4B5C7A',technical:'#5E6B66'};
+  function x(v){return 80+((v+2)/10)*660}
+  function y(v){return 320-((Math.abs(v))/50)*280}
+  actions.forEach(a=>{
+    let cx=x((a.cost[0]+a.cost[1])/2),cy=y((a.carbon[0]+a.carbon[1])/2),r=8+a.conf*2,c=colors[a.tag];
+    svg.insertAdjacentHTML('beforeend',`${a.applied?`<circle cx="${cx}" cy="${cy}" r="${r+5}" fill="none" stroke="#1F5A50" stroke-width="2"/>`:''}<circle data-id="${a.id}" cx="${cx}" cy="${cy}" r="${r}" fill="${c}" fill-opacity=".85" stroke="#fff" stroke-width="1.5" style="cursor:pointer"/><text x="${cx+r+6}" y="${cy+4}" font-family="Inter" font-size="11" font-weight="700" fill="#15201D">${a.name}</text>`)
+  });
+  svg.querySelectorAll('circle[data-id]').forEach(c=>c.onclick=()=>{actions.find(a=>a.id===c.dataset.id).applied=!actions.find(a=>a.id===c.dataset.id).applied;render()});
+}
+
+/* ===================== ROW & ACTION CARDS ===================== */
+function actionLarge(a,i){
+  let d=document.createElement('div');
+  d.className='card actionLarge '+(a.applied?'applied':'');
+  d.dataset.id=a.id;
+  d.innerHTML=`<div class="rankrow"><div class="ranknum">${i}</div><span class="tag ${a.tag}">★ ${tagLabel(a.tag)}</span></div><div class="aname">${a.name}</div><div class="adesc">${a.sub}</div><div class="deltas"><div class="delta"><div class="lab">Carbone</div><div class="val good">${cr(a.carbon)}</div></div><div class="delta"><div class="lab">Coût</div><div class="val ${clsCost(a.cost)}">${range(a.cost)}</div></div></div>`;
+  d.onclick=()=>{a.applied=!a.applied;render()};
+  return d;
+}
+function row(a){
+  let d=document.createElement('div');
+  d.className='card rowcard '+(a.applied?'applied':'');
+  d.dataset.id=a.id;
+  d.innerHTML=`<div class="rnk">${a.star?'★':a.rank}</div><div><div class="line1"><span class="aname" style="font-size:.96rem">${a.name}</span><span class="tag ${a.tag}">${tagLabel(a.tag)}</span><span class="hub">${a.hub}</span></div><div class="small">${a.sub}</div></div><div class="inlineDelta"><div class="mini"><div class="lab">Carbone</div><div class="val good">${cr(a.carbon)}</div></div><div class="mini"><div class="lab">Coût</div><div class="val ${clsCost(a.cost)}">${range(a.cost)}</div></div></div><div class="conf">${[1,2,3].map(i=>`<i class="${i<=a.conf?'':'off'}"></i>`).join('')}</div><button class="apply">${a.applied?'Appliqué':'Appliquer'}</button>`;
+  d.onclick=()=>{a.applied=!a.applied;render()};
+  return d;
+}
+
+/* ===================== MASTER RENDER ===================== */
+function render(){
+  // sync project label across screens
+  document.getElementById('prLev').textContent=project.name;
+  document.getElementById('prSyn').textContent=project.name;
+  document.getElementById('chType').textContent=({residential:'Résidentiel',office:'Bureaux',industrial:'Industriel',healthcare:'EMS'})[project.type]||'—';
+  document.getElementById('chTypeSy').textContent=({residential:'Résidentiel',office:'Bureaux',industrial:'Industriel',healthcare:'EMS'})[project.type]||'—';
+  document.getElementById('chCanton').textContent=project.canton;
+  document.getElementById('chCantonSy').textContent=project.canton;
+
+  // sync target buttons
+  document.querySelectorAll('.target button[data-target]').forEach(b=>b.classList.toggle('on',b.dataset.target===target));
+  const meta=targets[target].val.toFixed(1)+' kgCO₂e/m²/an';
+  ['metaPos','metaL','metaS','metaSy'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=meta});
+
+  // synthese metrics (from levers)
+  let p=projectAgg(),base=targets[target].gap;
+  document.getElementById('dNow').textContent=sgn(base);
+  document.getElementById('dlNow').textContent=sgn(base);
+  document.getElementById('dProj').textContent=p.high<0?`${Math.abs(p.high)} à ${Math.abs(p.low)}% sous l'objectif`:p.low>0?`${p.low} à ${p.high}% au-dessus de l'objectif`:`${sgn(p.low)} à ${sgn(p.high)} vs cible`;
+  document.getElementById('dCost').textContent=range(p.cost);
+  document.getElementById('dmNow').style.left=document.getElementById('dlNow').style.left=pos(base)+'%';
+  document.getElementById('dmProj').style.left=document.getElementById('dlProj').style.left=pos(p.mid)+'%';
+  document.getElementById('dlProj').textContent=sgn(p.mid);
+
+  // banner (Leviers/Scénarios)
+  document.getElementById('bNow').textContent=sgn(base);
+  document.getElementById('bProj').textContent=sgn(p.mid);
+  document.getElementById('bLabel').textContent='Avec '+p.count+' action'+(p.count>1?'s':'');
+  document.getElementById('bCost').textContent=range(p.cost);
+  document.getElementById('bmNow').style.left=pos(base,-40,40)+'%';
+  document.getElementById('bmProj').style.left=pos(p.mid,-40,40)+'%';
+  document.getElementById('count').textContent=p.count;
+
+  // top actions (Synthèse), full list (Leviers)
+  document.getElementById('topActions').innerHTML='';
+  actions.slice(0,2).forEach((a,i)=>document.getElementById('topActions').appendChild(actionLarge(a,i+1)));
+  document.getElementById('list').innerHTML='';
+  actions.forEach(a=>document.getElementById('list').appendChild(row(a)));
+
+  // checklist
+  document.getElementById('check').innerHTML='';
+  checklist.forEach(x=>document.getElementById('check').insertAdjacentHTML('beforeend',`<div class="item"><span>${x[0]}</span><span class="status ${x[2]}">${x[1]}</span></div>`));
+
+  // charts
+  drawPosChart();
+  drawTrade();
+  renderLots();
+
+  // intake hints
+  document.getElementById('fCostM2').textContent=Math.round(project.cost*project.vol/project.gfa);
+  document.getElementById('fCO2tot').textContent=(project.co2*project.gfa/1000).toFixed(1);
+
+  // interpretation
+  renderInterp();
+}
+
+/* ===================== EVENTS ===================== */
+// tabs
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.querySelectorAll('.mode').forEach(x=>x.classList.remove('on'));
+  document.getElementById(b.dataset.mode).classList.add('on');
+  // banner shown only on Leviers + Scénarios
+  document.getElementById('banner').classList.toggle('on',b.dataset.mode==='leviers'||b.dataset.mode==='scenarios');
+  scrollTo({top:0,behavior:'smooth'});
+  render();
+});
+// CTAs
+document.getElementById('goLeviers').onclick=()=>document.querySelector('.tabs button[data-mode="leviers"]').click();
+document.getElementById('goLeviers2').onclick=()=>document.querySelector('.tabs button[data-mode="leviers"]').click();
+// target buttons (any screen)
+document.querySelectorAll('.target button[data-target]').forEach(b=>b.onclick=(e)=>{e.stopPropagation();target=b.dataset.target;render()});
+// reset
+document.getElementById('reset').onclick=(e)=>{e.stopPropagation();actions.forEach(a=>a.applied=false);render()};
+// intake form
+document.getElementById('fName').oninput=e=>{project.name=e.target.value;render()};
+document.getElementById('fType').onchange=e=>{project.type=e.target.value;render()};
+document.getElementById('fCanton').onchange=e=>{project.canton=e.target.value;render()};
+document.getElementById('fGFA').oninput=e=>{project.gfa=+e.target.value||0;render()};
+document.getElementById('fVol').oninput=e=>{project.vol=+e.target.value||0;render()};
+document.getElementById('fCost').oninput=e=>{project.cost=+e.target.value||0;render()};
+document.getElementById('fCO2').oninput=e=>{project.co2=+e.target.value||0;render()};
+// baseline form
+document.getElementById('bCostInp').oninput=e=>{baseline.cost=+e.target.value||0;render()};
+document.getElementById('bStd').onchange=e=>{baseline.std=e.target.value;render()};
+document.getElementById('bType').onchange=e=>{baseline.type=e.target.value;render()};
+document.querySelectorAll('#qualToggle button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#qualToggle button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');baseline.qual=b.dataset.q;render();
+});
+
+render();
 </script>
 </body>
 </html>
