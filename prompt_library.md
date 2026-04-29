@@ -222,7 +222,7 @@ Return ONLY the modified parts using unified diff format:
 +++ updated
 @@
 - old line
-+ new line
++ new line```
 
 # 🔧 7.PROMPT — Generate HTML Patch from Spec (No Rewrite)
 
