@@ -94,6 +94,20 @@ L’utilisateur comprend mieux :
 
 ---
 
+### UX-05 — Unité carbone exploitable
+L’utilisateur comprend mieux une intensité carbone exprimée **par année** (kgCO₂e/m²/an) qu’une valeur cumulée
+
+→ Justification :
+- cohérence avec logique d’exploitation déjà connue
+- permet de comparer plus intuitivement avec des seuils normatifs (ex : SIA 390/1)
+- facilite la lecture du “niveau d’effort”
+
+→ Implication UX :
+Afficher explicitement une référence de type :
+- **9 kgCO₂e/m²/an (SIA 390/1)**
+
+---
+
 ## 4. Décisions prises
 
 - Comparables restent cachés (backend uniquement)
@@ -101,6 +115,10 @@ L’utilisateur comprend mieux :
 - Introduction du concept de “gap vs target”
 - Introduction du concept de “référence utilisateur”
 - Passage CHF/m² → CHF/m³ (à implémenter)
+- Axe des ordonnées = **carbone gris exprimé en kgCO₂e/m²/an**
+- Intégration d’un repère visuel correspondant à la cible **SIA 390/1 (~9 kgCO₂e/m²/an)**
+- Affichage explicite de l’unité “/an” pour éviter toute ambiguïté
+- Harmonisation des indicateurs carbone avec une logique de lecture comparable à l’exploitation
 
 ---
 
@@ -123,6 +141,17 @@ L’utilisateur comprend mieux :
 
 - Le graphe devient-il trop complexe avec 4 éléments ?
   (projet / marché / cible / référence utilisateur)
+
+- Les utilisateurs comprennent-ils immédiatement la notion de carbone gris annualisé (kgCO₂e/m²/an) ?
+- Faut-il expliciter le passage :
+  - carbone construction total → équivalent annualisé ?
+- Le seuil **9 kgCO₂e/m²/an** est-il perçu comme :
+  - une contrainte réglementaire
+  - un objectif ambitieux
+  - un standard atteignable ?
+- Faut-il afficher simultanément :
+  - valeur annualisée
+  - valeur totale projet (tonnes CO₂) ?
 
 ---
 
@@ -171,7 +200,42 @@ Vérifier si CarbonRef permet :
 
 ---
 
-## 7. Backlog produit (nouveau)
+### Test 5 — Compréhension de l’unité carbone
+
+Objectif :
+Vérifier si l’utilisateur comprend :
+
+- la signification de **kgCO₂e/m²/an**
+- la différence entre carbone construction et exploitation
+- le lien avec la norme SIA 390/1
+
+---
+
+### Test 6 — Lecture du seuil SIA
+
+Objectif :
+Tester la perception de la ligne **9 kgCO₂e/m²/an**
+
+Questions :
+
+- “Est-ce que ce seuil vous parle ?”
+- “Est-ce que vous savez si vos projets actuels sont au-dessus ou en dessous ?”
+- “Est-ce que cela vous aide à vous situer rapidement ?”
+
+---
+
+### Test 7 — Interprétation visuelle
+
+Objectif :
+Valider que :
+
+- l’axe carbone est compris sans explication détaillée
+- la présence du “/an” réduit les ambiguïtés
+- le graphe reste lisible malgré l’ajout de cette information
+
+---
+
+## 7. Backlog produit
 
 - [ ] Remplacer CHF/m² → CHF/m³
 - [ ] Ajouter bloc “référence utilisateur”
