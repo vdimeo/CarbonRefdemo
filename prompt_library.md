@@ -272,7 +272,7 @@ Return ONLY a unified diff patch:
 + new line
 
 
----
+---```
 
 # 🔧 PROMPT — Apply HTML Patch Safely
 
