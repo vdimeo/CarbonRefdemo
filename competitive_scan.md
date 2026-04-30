@@ -580,3 +580,114 @@ Yes:
 
 *Document end — Version 1.0, April 2026*
 *Next update: after user testing sessions and REMS session review*
+
+---
+
+## ADDENDUM — Keevalue × Popety Stack (April 2026)
+
+*Added before Bus Dev call — critical intelligence*
+
+---
+
+### Keevalue.ch — ⚠️ The Most Strategically Significant Swiss Actor
+
+**What they are:** Swiss construction cost estimation platform, founded 2014 by architects. CEO: **Stefan Cadosch — former president of SIA**. Based in Brugg (Aargau).
+
+**Core product:** Construction cost estimation from first sketch to demolition, per building element, per year. Regional differentiation (Zurich ≠ Bern ≠ Ticino). Claims < 10% deviation from actual costs on a dataset of completed Swiss projects.
+
+**What they cover:**
+- CHF/m² and CHF/m³ SIA by building type and region — the exact cost data CarbonRef uses as an axis
+- Operating costs (Betriebskosten)
+- Energy, water, and **CO₂ benchmarks** — they already track carbon, even if secondary
+- BIM integration: real-time cost + CO₂ delta per design change
+
+**Target users:** Architects, planners, and Bauherren (MOA) — same as CarbonRef.
+
+**The CEO factor is critical.** Cadosch as former SIA president means:
+- Maximum regulatory legitimacy in Switzerland
+- Deep relationships with SIA norm-setting bodies (SIA 390/1 is directly in his orbit)
+- Distribution access to architects and engineering firms that CarbonRef currently lacks
+- He could add a carbon positioning layer to Keevalue's cost tool and be the most credible actor in the Swiss market to do so
+
+---
+
+### Popety.io — Land Prospecting Layer
+
+**What they are:** Swiss proptech, focused on identifying underexploited plots for development. Core product: "LandDev" — aggregates official Swiss data (federal, cantonal, municipal) to rate plots for development potential.
+
+**Coverage:** French-speaking Switzerland (GE, VD, FR, VS, NE, JU) + ZH, BS, BE.
+
+**Investor:** Romande Energie (utility, 6.45% stake, Jan 2024) — signals an energy/sustainability angle.
+
+**Four pillars:** Explore (plot rating) → Analyse (key plot data) → Share (export) → Alerts (monitoring).
+
+**What they don't have:** construction cost estimates, carbon analysis — hence the Keevalue partnership.
+
+---
+
+### The Keevalue × Popety Stack
+
+What this partnership creates:
+
+```
+[Land opportunity]     ← Popety (plot rating, zoning, potential)
+[Construction cost]    ← Keevalue (CHF/m³, by type and region)
+[Carbon positioning]   ← ??? — the missing layer
+```
+
+Together, they are building a **feasibility cockpit for Swiss developers** at the earliest project stage. This is the same user, the same moment, and the same workflow as CarbonRef.
+
+**The gap they leave:** neither Popety nor Keevalue positions the project relative to carbon targets (SIA 390/1, Minergie). Their joint stack answers "can I build this, and how much will it cost?" but not "will this project be carbon-compatible, and what's the cost of making it so?"
+
+**That is CarbonRef's exact opening.**
+
+---
+
+### Strategic Options Going Into the Call
+
+**Option A — Partner / API integration**
+CarbonRef plugs into the Keevalue cost data as its cost axis benchmark, and provides the carbon positioning layer to the Keevalue-Popety stack. Division of labor: Keevalue owns cost, CarbonRef owns carbon + decision UX.
+
+*Upside:* Keevalue's dataset solves CarbonRef's hardest data problem (real CHF/m³ benchmarks). Distribution via Popety's developer user base.
+*Downside:* Dependency risk. If Keevalue decides to build the carbon layer themselves, CarbonRef loses its differentiation.
+
+**Option B — White-label / embedded module**
+CarbonRef's cost-carbon positioning view becomes an embedded tab inside the Popety webapp, powered by Keevalue cost data.
+
+*Upside:* CarbonRef doesn't need to build distribution; Popety has the developer audience.
+*Downside:* Loss of brand; pricing and margin controlled by Popety.
+
+**Option C — Co-exist, differentiate clearly**
+CarbonRef targets a different buyer (MOA investment committee, asset owner) rather than the developer/broker that Popety serves. Different moment in the project lifecycle, different decision.
+
+*Upside:* No dependency, full control of positioning.
+*Downside:* Harder distribution path; parallel market development.
+
+**Option D — Keevalue as the acquirer / data licensor**
+Keevalue licenses their CHF/m³ dataset to CarbonRef in exchange for the carbon positioning layer, co-branded or co-developed.
+
+*This may be the most durable structure* — Keevalue gets a carbon product without building it, CarbonRef gets Swiss cost data without collecting it.
+
+---
+
+### Call Prep: Questions to Probe
+
+**On Keevalue's carbon ambition:**
+- "Vous avez déjà des données CO₂ dans votre plateforme — est-ce que vous avez un projet de les rendre plus décisionnelles ?"
+- "Est-ce que vous travaillez avec SIA 390/1 comme référence pour votre couche carbone ?"
+
+**On the Popety partnership scope:**
+- "Le partenariat avec Popety — c'est une API, un white-label, ou une co-vente ?"
+- "Qui est le client final : le promoteur, le broker, ou le MOA ?"
+
+**On the gap they know they have:**
+- "Dans votre outil actuel, est-ce qu'un utilisateur peut voir si son projet est compatible avec des objectifs carbone ?"
+- (If no:) "Est-ce que c'est un besoin que vous entendez de vos clients ?"
+
+**On partnership appetite:**
+- "Est-ce que vous avez réfléchi à intégrer une couche de positionnement carbone dans votre workflow ?"
+
+**What NOT to reveal at this stage:**
+- The details of CarbonRef's benchmark data sources (keep data layer ambiguous)
+- Any pricing structure
+- The fact that CarbonRef's benchmarks are currently manually calibrated rather than live API-fed
