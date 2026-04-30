@@ -242,3 +242,48 @@ Valider que :
 - [ ] Ajouter point/zone “baseline utilisateur” sur graphe
 - [ ] Ajouter affichage “effort pour atteindre cible”
 - [ ] Tester version simplifiée vs version complète du graphe
+
+---
+
+## 8. Décisions workflow AI (conv. "v8 UX change" — 2026-04-30)
+
+### Valeurs par défaut du démo
+
+Hypothèse validée : les valeurs par défaut du formulaire font un travail cognitif réel — elles calibrent l'intuition de l'utilisateur sur ce qui est "normal" avant qu'il ne saisisse ses propres données. Une valeur irréaliste (ex : 1700 CHF/m³) génère une dissonance immédiate.
+
+→ Décision : plage réaliste pour les valeurs démo par défaut :
+- Coût : 800–1000 CHF/m³ SIA
+- Carbone : 11–14 kgCO₂e/m²/an
+- Axe X du graphe Positionnement : plafonner à ~1400 CHF/m³ (au lieu de 2200)
+
+### Règles de travail avec les outils AI sur ce projet
+
+**Claude Code (édition de index.html) :**
+Toujours préciser : "Modifications chirurgicales uniquement. Ne pas réécrire, réorganiser ou toucher les sections non mentionnées explicitement."
+
+**Cowork (édition des fichiers .md) :**
+Toujours préciser : "Lire le fichier en entier d'abord, puis ajouter uniquement en bas — ne pas modifier ni supprimer le contenu existant."
+
+→ Principe général : plus la portée est précise, moins il y a de risque de réécriture ou d'hallucination de contenu existant.
+
+### Valeur par défaut du coût projet (conv. "v8 UX change" — 2026-04-30)
+
+Décision : la valeur préremplie du champ "Coût estimé (CHF/m³)" dans le formulaire Positionnement est fixée à **850 CHF/m³ SIA**.
+
+- `1700 CHF/m³` ne doit plus apparaître comme valeur par défaut — elle est irréaliste pour la gamme cible (construction neuve standard, marché suisse romand).
+- La plage réaliste retenue pour les projets de référence est **800–1000 CHF/m³ SIA**.
+- `850` est retenu comme valeur centrale représentative.
+- Le graphe n'a pas de valeur codée en dur indépendante : il lit l'état du formulaire, donc ce changement se propage automatiquement.
+
+### Identité de la référence utilisateur (conv. "v9 30042026" — 2026-04-30)
+
+Le bloc "Votre référence habituelle" peut désormais inclure des champs d'identification :
+
+- `Nom de la référence` — nommer le projet historique (ex : "EMS historique 2022")
+- `Canton` et `Ville` — localisation régionale du projet de référence
+- `Adresse / remarque (optionnel)` — champ libre, non obligatoire
+
+→ Décisions :
+- L'adresse complète (rue + numéro) est jugée trop administrative pour une saisie de premier contact. Remplacée par un champ libre optionnel.
+- Ces données restent privées et internes — elles ne sont jamais transmises au benchmark marché.
+- L'objectif est d'ancrer la comparaison dans un projet connu de l'utilisateur, renforçant confiance et interprétabilité du graphe.

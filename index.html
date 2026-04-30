@@ -184,7 +184,7 @@
         </div>
         <div class="formRow">
           <div class="field"><label>Coût estimé (CHF/m³)</label>
-            <input type="number" id="fCost" value="1700" step="10">
+            <input type="number" id="fCost" value="850" step="10">
             <div class="hint">≈ <span id="fCostM2">5950</span> CHF/m²</div>
           </div>
           <div class="field"><label>Carbone estimé (kgCO₂e/m²/an)</label>
@@ -198,6 +198,25 @@
       <div class="card formCard baselineCard">
         <h3>Votre référence habituelle <span class="badge">Référence interne</span></h3>
         <div class="ssub">Capture votre capacité historique à construire — pour vous positionner d'abord par rapport à vous-même.</div>
+
+        <div class="formRow single">
+          <div class="field"><label>Nom de la référence</label>
+            <input type="text" id="baseline-name" name="baseline-name" placeholder="EMS historique 2022">
+          </div>
+        </div>
+        <div class="formRow">
+          <div class="field"><label>Canton</label>
+            <input type="text" id="baseline-canton" name="baseline-canton" placeholder="Vaud">
+          </div>
+          <div class="field"><label>Ville</label>
+            <input type="text" id="baseline-city" name="baseline-city" placeholder="Morges">
+          </div>
+        </div>
+        <div class="formRow single">
+          <div class="field"><label style="color:var(--muted);font-weight:normal">Adresse / remarque (optionnel)</label>
+            <input type="text" id="baseline-address" name="baseline-address">
+          </div>
+        </div>
 
         <div class="formRow">
           <div class="field"><label>Coût habituel (CHF/m³)</label>
@@ -431,7 +450,7 @@
 const targets={sia:{name:'SIA 390/1',val:9.0,gap:11},minergie:{name:'Minergie-A-ECO',val:7.5,gap:33},custom:{name:'Personnalisé',val:8.0,gap:25}};
 let target='sia';
 
-const project={name:'EMS Vaud · esquisse',type:'healthcare',canton:'VD',gfa:8000,vol:28000,cost:875,co2:11.5};
+const project={name:'EMS Vaud · esquisse',type:'healthcare',canton:'VD',gfa:8000,vol:28000,cost:850,co2:12.5};
 const baseline={cost:850,std:'minergie',type:'',qual:'std'};
 
 const actions=[
@@ -461,7 +480,7 @@ function drawPosChart(){
   const svg=document.getElementById('posChart');
   if(!svg)return;
   // axis ranges
-  const xMin=600,xMax=2200,yMin=0,yMax=20;
+  const xMin=600,xMax=1400,yMin=0,yMax=20;
   const padL=70,padR=30,padT=30,padB=50;
   const W=800,H=420;
   const x=v=>padL+((v-xMin)/(xMax-xMin))*(W-padL-padR);
@@ -482,7 +501,7 @@ function drawPosChart(){
   html+=`<text class="axisTitle" x="${(W+padL-padR)/2}" y="${H-12}" text-anchor="middle">Coût · CHF/m³ SIA</text>`;
   html+=`<text class="axisTitle" x="${20}" y="${H/2}" text-anchor="middle" transform="rotate(-90 20 ${H/2})">Carbone · kgCO₂e/m²/an</text>`;
   // market benchmark cloud (aggregated zone) — soft ellipse for healthcare
-  const mktCx=x(1700),mktCy=y(11),mktRx=(x(2100)-x(1300))/2,mktRy=(y(8)-y(14))/2;
+  const mktCx=x(925),mktCy=y(12.5),mktRx=(x(1050)-x(800))/2,mktRy=(y(11)-y(14))/2;
   html+=`<ellipse cx="${mktCx}" cy="${mktCy}" rx="${mktRx}" ry="${mktRy}" fill="${'rgba(75,92,122,0.10)'}" stroke="#4B5C7A" stroke-width="1" stroke-dasharray="4 4"/>`;
   html+=`<text class="axis" x="${mktCx}" y="${mktCy-mktRy-8}" text-anchor="middle" fill="#4B5C7A">Benchmark marché — santé/EMS · agrégé</text>`;
   // SIA 390/1 reference line at y=9 (always visible per spec)
