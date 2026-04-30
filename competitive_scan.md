@@ -11,30 +11,25 @@ Tools that: deal with embodied carbon in construction / operate at project level
 
 ---
 
-### 1.1 C.Scale (USA) — ⚠️ Closest philosophical twin
+### 1.1 C.Scale (USA) — 🔄 RECLASSIFIED: Adjacent tool, not competitor
 
-**Positioning:** "Whole life carbon platform from concept through construction." Designed as the "shoebox model" of carbon: simple inputs, fast iteration, instant picture of where emissions come from.
+**Updated assessment (April 2026):** Initial classification as "closest philosophical twin" was too broad. After reviewing product documentation and demos, C.Scale belongs in a fundamentally different category.
 
-**Target users:** Architects, sustainability consultants at concept/schematic stage. Increasingly also developers and investors (post-$2M seed, Nov 2025).
+**What C.Scale actually does:** Carbon optimization for designers as design progresses. Input: building type, size, location, structural system, enclosure type, MEP strategy. Output: carbon intensity by system + ranked design strategies. It is a **carbon strategy tool for architects and sustainability consultants** — not a decision cockpit for investors.
 
-**Strengths:**
-- Nails the early-stage philosophy: model in under 10 minutes
-- Whole-life carbon (embodied + operational) in one pass
-- Free tier (3 projects), low friction entry
-- API available — signals a platform ambition
-- Recent acquisition of Tally 2.0 → bridging concept stage to BIM-integrated LCA
-- Clean, decision-first UX (not a calculation form)
+**Core logic:** design input → carbon optimization → design refinement → handoff to LCA
+**CarbonRef core logic:** project framing → position vs target → cost-carbon trade-off → investment decision
 
-**Weaknesses:**
-- **No cost dimension** — carbon only, no CHF/m³ equivalent
-- **No user baseline** — compares to benchmark, not to user's own history
-- **US-centric** — benchmarks, regulation framing, units (imperial)
-- **No Swiss / SIA 390/1 alignment** whatsoever
-- Still primarily a carbon tool, not a decision cockpit for non-experts
-- Requires some sustainability literacy to interpret outputs
+**The Tally 2.0 acquisition confirms the direction:** C.Scale is moving *downstream* toward BIM-integrated detailed LCA. CarbonRef moves *upstream* toward pre-mandate investment decisions. They are on opposite trajectories.
+
+**Real user:** Architect, sustainability consultant. "Owners" appear in marketing but are not the functional user — every output (design strategy options, system-level carbon) requires someone managing a design to act on.
+
+**No cost axis.** Confirmed. No CHF/m³ equivalent exists in the product.
 
 **Is it a real competitor to CarbonRef?**
-Philosophical cousin, not a current competitor. C.Scale is for architects and consultants in North America. CarbonRef targets Swiss MOA (maîtres d'ouvrage) and investment committees. The cost-carbon trade-off axis, the SIA 390/1 anchor, and the "user baseline" concept are CarbonRef-specific and absent from C.Scale. *However: if C.Scale expands to Europe and adds a cost axis, the overlap becomes real.*
+No. Adjacent tool in a different layer. The relationship is: **CarbonRef sets the constraint (carbon target + cost envelope). C.Scale works within it.** They serve the same project but different people at different moments — the investment committee before mandate, versus the design team after mandate.
+
+**Risk:** Market-level confusion only. Both tools say "early-stage carbon" and "no LCA expertise required." A sustainability manager who has heard of C.Scale will pattern-match CarbonRef into the same category. This is a messaging problem, not a product competition problem. See Section 5 for implications.
 
 ---
 
@@ -110,7 +105,23 @@ No — but it is the *default fallback* for Swiss engineers. CarbonRef's value p
 
 ---
 
-### 1.5 Ecotool / Lesosai / Enerweb (Switzerland) — Calculation tools, not competitors
+### 1.5 SimplexyBee SIA 390/1 Copilot (Switzerland) — Layer 2 compliance tool, not a competitor
+
+**What it is:** SIA 390/1 compliance automation tool for architects and energy consultants. Built by SimplexyBee — a generic Swiss software shop that also makes tennis court management software and ERP for leather bag manufacturing. This context matters: no focused climate tech ambition, no dedicated distribution, opportunistic roadmap.
+
+**Core product:** Guided SIA 390/1 compliance filing with automated energy calculations (heating, cooling, primary energy, CO₂), integrated KBOB v7.0 ecological database, SIA 2032:2000 component catalog (1000+ components with U-values), and authority-ready report generation. Multi-language (DE/FR/IT).
+
+**Target users:** Architects, energy consultants, competition organizers. Not MOA or investment committees.
+
+**Is it a competitor?** No. It operates entirely in Layer 2 (compliance calculation). No cost axis, no benchmark positioning, no user baseline, no trade-off logic. It is what an engineer opens after CarbonRef has already framed the decision.
+
+**One interesting UX pattern:** The competition comparison feature — anonymous multi-project submission, side-by-side comparison on standardized criteria, shareable jury report. This is the closest thing to a "non-expert comparing carbon across multiple projects" pattern in the Swiss market. The use case is architecture competitions; the underlying UX maps onto what an investment committee does when comparing project options. Relevant for CarbonRef's Scénarios tab future direction.
+
+**Risk to manage:** A MOA who receives a SIA Copilot compliance report from their engineer may assume carbon has been "handled" — and not see the need for CarbonRef. This is a sequencing confusion risk, not product competition. CarbonRef's messaging must make clear it operates before SIA Copilot is ever opened.
+
+---
+
+### 1.6 Ecotool / Lesosai / Enerweb (Switzerland) — Calculation tools, not competitors
 
 These are Swiss tools for early or detailed phase LCA, as referenced in SIA documentation. They are engineering calculation environments, not decision interfaces. No cost axis. No decision orientation.
 
