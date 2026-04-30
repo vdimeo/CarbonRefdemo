@@ -13,7 +13,20 @@ Instructions:
 - Work only with existing structure unless explicitly asked otherwise
 
 ---
+## 🔗 Context global (à réutiliser partout)
 
+Context:
+- Product spec: carbonref_spec.md
+- Current HTML: index.html
+- UX Journal: carbonref_ux_journal.md
+- Claude.md: CLAUDE.md
+
+Instructions:
+- Always read ALL documents before answering
+- Do NOT hallucinate missing parts
+- Work only with existing structure unless explicitly asked otherwise
+
+---
 # 🧠 1. Prompt — Update UX Journal (incremental only)
 
 Context:
